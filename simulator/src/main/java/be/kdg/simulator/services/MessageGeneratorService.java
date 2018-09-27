@@ -3,6 +3,7 @@ package be.kdg.simulator.services;
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.model.CameraMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.TimerTask;
  * @version 1.0 25/09/2018 14:35
  */
 @Service
+@ConditionalOnProperty(name = "generator.type", havingValue = "random")
 public class MessageGeneratorService implements GeneratorService {
     @Autowired
     private MessageGenerator messageGenerator;

@@ -11,12 +11,11 @@ import java.util.Random;
 @ConditionalOnProperty(name = "generator.type", havingValue = "random")
 public class RandomMessageGenerator implements MessageGenerator {
     private Random random = new Random();
-    private static int maxNumber = 9;
-    private static int id = 1;
+    private final static int MAX_ID = 50;
 
     @Override
     public CameraMessage generate() {
-        return new CameraMessage(id++, generateLicensePlate(), LocalDateTime.now());
+        return new CameraMessage(random.nextInt(MAX_ID), generateLicensePlate(), LocalDateTime.now());
     }
 
     public String generateLicensePlate() {
