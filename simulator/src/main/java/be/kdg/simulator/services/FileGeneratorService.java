@@ -2,6 +2,7 @@ package be.kdg.simulator.services;
 
 import be.kdg.simulator.generators.FileGenerator;
 import be.kdg.simulator.generators.MessageGenerator;
+import be.kdg.simulator.messengers.Messenger;
 import be.kdg.simulator.model.CameraMessage;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.Random;
 public class FileGeneratorService implements GeneratorService {
     @Autowired
     private FileGenerator messageGenerator;
+    @Autowired
+    private Messenger messenger;
 
     @Override
     public void start() {

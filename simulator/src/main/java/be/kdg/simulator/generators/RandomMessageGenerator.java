@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -12,12 +13,11 @@ import java.util.Random;
 @ConditionalOnProperty(name = "generator.type", havingValue = "random")
 public class RandomMessageGenerator implements MessageGenerator {
     private Random random = new Random();
-
     private final static int MAX_ID = 50;
 
     @Override
     public CameraMessage generate() {
-        return new CameraMessage(random.nextInt(MAX_ID), generateLicensePlate(), LocalDateTime.now());
+        return new CameraMessage(random.nextInt(MAX_ID - 1) + 1, generateLicensePlate(), LocalDateTime.now());
     }
 
     //TODO 3 cijfers moeten ook met 0 kunnen beginnen

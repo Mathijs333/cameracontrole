@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+
 @Component
 @ConditionalOnProperty(name = "messenger.type", havingValue = "commandLine")
 //APPLICATION FAILED TO START oplossen met:
@@ -16,11 +18,7 @@ import org.springframework.stereotype.Component;
 public class CommandLineMessenger implements Messenger {
 
     @Autowired
-    private final MessageGenerator messageGenerator;
-
-    public CommandLineMessenger( MessageGenerator messageGenerator) {
-        this.messageGenerator = messageGenerator;
-    }
+    private MessageGenerator messageGenerator;
 
     @Override
     @Scheduled(fixedDelay = 1000L)
