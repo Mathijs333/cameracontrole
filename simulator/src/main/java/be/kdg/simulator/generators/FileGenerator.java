@@ -1,6 +1,7 @@
 package be.kdg.simulator.generators;
 
 import be.kdg.simulator.model.CameraMessage;
+import javafx.util.Pair;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,11 @@ public class FileGenerator implements MessageGenerator {
         catch (Exception ex) {
             //TODO catchen
         }
+        return null;
+    }
+
+    public Pair<CameraMessage, Integer> getFullCameraMessage() {
+        CameraMessage message = generate();
         return null;
     }
 }

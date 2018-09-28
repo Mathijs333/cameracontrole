@@ -4,12 +4,9 @@ import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.model.CameraMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author Mathijs Constantin
@@ -32,7 +29,7 @@ public class MessageGeneratorService implements GeneratorService {
                 Thread.sleep(r.nextInt(500) + 100);
                 System.out.println(message.toString());
             }
-            while ("".isEmpty());
+            while (true);
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());

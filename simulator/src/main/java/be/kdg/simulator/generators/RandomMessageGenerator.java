@@ -1,6 +1,7 @@
 package be.kdg.simulator.generators;
 
 import be.kdg.simulator.model.CameraMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.Random;
 @ConditionalOnProperty(name = "generator.type", havingValue = "random")
 public class RandomMessageGenerator implements MessageGenerator {
     private Random random = new Random();
+
     private final static int MAX_ID = 50;
 
     @Override
