@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,9 +21,8 @@ public class RandomMessageGeneratorTest {
 
     @Test
     public void testRandomMessageGenerator() {
-        String regex = "1-[A-Z]{3}-[1-9]{3}";
+        String regex = "1-[A-Z]{3}-[0-9]{3}";
         CameraMessage cameraMessage = randomMessageGenerator.generate();
         Assert.assertTrue(cameraMessage.getLicensePlate().matches(regex));
-
     }
 }

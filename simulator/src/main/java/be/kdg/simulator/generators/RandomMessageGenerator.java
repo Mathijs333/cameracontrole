@@ -20,6 +20,7 @@ public class RandomMessageGenerator implements MessageGenerator {
         return new CameraMessage(random.nextInt(MAX_ID), generateLicensePlate(), LocalDateTime.now());
     }
 
+    //TODO 3 cijfers moeten ook met 0 kunnen beginnen
     public String generateLicensePlate() {
         String licensePlate = "1-";
         for (int i = 0; i < 3; i++) {
