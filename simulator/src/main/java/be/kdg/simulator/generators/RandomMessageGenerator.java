@@ -1,6 +1,7 @@
 package be.kdg.simulator.generators;
 
 import be.kdg.simulator.model.CameraMessage;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

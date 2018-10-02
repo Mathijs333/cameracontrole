@@ -19,6 +19,7 @@ import java.util.Random;
  */
 //Cameramessage met delay meegeven en deze dan teurg genereren langs service?
 @Service
+@Component
 @ConditionalOnProperty(name = "generator.type", havingValue = "file")
 public class FileGeneratorService implements GeneratorService {
     @Autowired
@@ -30,10 +31,10 @@ public class FileGeneratorService implements GeneratorService {
     public void start() {
         do {
             Pair<CameraMessage, Integer> message = messageGenerator.getFullCameraMessage();
-            System.out.println(message.getKey());
+            messenger.sendMessage(message.getKey());
             try {
                 Thread.sleep(message.getValue());
-                System.out.println(message.getKey());
+                messenger.sendMessage(message.getKey());
             }
             catch (Exception ex) {
                 //TODO exception loggen of throwen

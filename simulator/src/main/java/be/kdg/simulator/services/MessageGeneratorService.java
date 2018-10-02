@@ -5,6 +5,7 @@ import be.kdg.simulator.messengers.Messenger;
 import be.kdg.simulator.model.CameraMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -14,6 +15,7 @@ import java.util.Random;
  * @version 1.0 25/09/2018 14:35
  */
 @Service
+@Component
 @ConditionalOnProperty(name = "generator.type", havingValue = "random")
 public class MessageGeneratorService implements GeneratorService {
     @Autowired
@@ -23,19 +25,19 @@ public class MessageGeneratorService implements GeneratorService {
 
     @Override
     public void start() {
-        /*CameraMessage message;
+        CameraMessage message;
         try {
             do {
                 Random r = new Random();
                 message = messageGenerator.generate();
-                System.out.println(message.toString());
+                messenger.sendMessage(message);
                 Thread.sleep(r.nextInt(500) + 100);
-                System.out.println(message.toString());
+                messenger.sendMessage(message);
             }
             while (true);
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }*/
+        }
     }
 }

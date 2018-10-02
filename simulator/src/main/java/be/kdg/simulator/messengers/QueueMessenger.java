@@ -1,13 +1,28 @@
 package be.kdg.simulator.messengers;
 
+import be.kdg.simulator.model.CameraMessage;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(name = "messenger.type", havingValue = "queue")
 public class QueueMessenger implements Messenger {
-    @Override
-    public void sendMessage() {
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
 
+    @Value("")
+    private String exchange;
+
+    @Value("")
+    private String routingKey;
+
+    @Override
+    public void sendMessage(CameraMessage message) {
+        rabbitTemplate.convertAndSend("spring-boot-exchange", "foo.bar.Cameracontrole",message.toString());
     }
 }

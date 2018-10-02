@@ -2,6 +2,8 @@ package be.kdg.simulator.generators;
 
 import be.kdg.simulator.model.CameraMessage;
 import javafx.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @Component
 @ConditionalOnProperty(name = "generator.type", havingValue = "file")
 public class FileGenerator implements MessageGenerator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
     private HashMap<CameraMessage, Integer> cameraMessages = new HashMap<CameraMessage, Integer>();
     //static list die gebruikt word door generate en timestamp aanpast naar delay, generate handelt deze één voor één af
     //Moet bestand inlezen (cameraID, nummerplaat, delay)
@@ -38,7 +41,7 @@ public class FileGenerator implements MessageGenerator {
             }
         }
         catch (Exception ex) {
-            //TODO catchen
+            LOGGER.error("There was an error", ex);
         }
     }
 

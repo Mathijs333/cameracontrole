@@ -1,6 +1,7 @@
 package be.kdg.simulator.messengers;
 
 import be.kdg.simulator.generators.MessageGenerator;
+import be.kdg.simulator.model.CameraMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -21,8 +22,7 @@ public class CommandLineMessenger implements Messenger {
     private MessageGenerator messageGenerator;
 
     @Override
-    @Scheduled(fixedDelay = 1000L)
-    public void sendMessage() {
-        System.out.println(messageGenerator.generate());
+    public void sendMessage(CameraMessage message) {
+        System.out.println(message);
     }
 }
