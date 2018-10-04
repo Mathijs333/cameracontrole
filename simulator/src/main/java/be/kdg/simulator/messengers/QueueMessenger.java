@@ -1,6 +1,10 @@
 package be.kdg.simulator.messengers;
 
+import be.kdg.simulator.generators.FileGenerator;
 import be.kdg.simulator.model.CameraMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(name = "messenger.type", havingValue = "queue")
 public class QueueMessenger implements Messenger {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
@@ -23,6 +28,13 @@ public class QueueMessenger implements Messenger {
 
     @Override
     public void sendMessage(CameraMessage message) {
-        rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue",message.toString());
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue", objectMapper.writeValueAsString(message));
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        LOGGER.info("Placed: ", message);
     }
 }

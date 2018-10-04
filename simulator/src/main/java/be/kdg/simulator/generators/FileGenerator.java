@@ -57,6 +57,7 @@ public class FileGenerator implements MessageGenerator {
     @Override
     public CameraMessage generate() {
         for (CameraMessage cameraMessage : cameraMessages.keySet()) {
+            LOGGER.info("Gegenereerd: ", cameraMessage);
             cameraMessages.remove(cameraMessage);
             return cameraMessage;
         }

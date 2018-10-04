@@ -1,6 +1,7 @@
 package be.kdg.simulator.generators;
 
 import be.kdg.simulator.model.CameraMessage;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,10 +16,13 @@ import java.util.Random;
 public class RandomMessageGenerator implements MessageGenerator {
     private Random random = new Random();
     private final static int MAX_ID = 50;
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
 
     @Override
     public CameraMessage generate() {
-        return new CameraMessage(random.nextInt(MAX_ID - 1) + 1, generateLicensePlate(), LocalDateTime.now());
+       CameraMessage message = new CameraMessage(random.nextInt(MAX_ID - 1) + 1, generateLicensePlate(), LocalDateTime.now());
+       LOGGER.info("Generated: ", message);
+       return message;
     }
 
     //TODO 3 cijfers moeten ook met 0 kunnen beginnen
