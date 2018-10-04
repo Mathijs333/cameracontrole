@@ -23,6 +23,6 @@ public class QueueMessenger implements Messenger {
 
     @Override
     public void sendMessage(CameraMessage message) {
-        rabbitTemplate.convertAndSend("spring-boot-exchange", "foo.bar.Cameracontrole",message.toString());
+        rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue",message.toString());
     }
 }
