@@ -5,7 +5,7 @@ package be.kdg.processor.model;
  * @version 1.0 4/10/2018 22:01
  */
 public class Car {
-    private int plateId;
+    private String plateId;
     private String nationalNumber;
     private int euroNumber;
 
@@ -13,17 +13,17 @@ public class Car {
 
     }
 
-    public Car(int plateId, String nationalNumber, int euroNumber) {
+    public Car(String plateId, String nationalNumber, int euroNumber) {
         this.plateId = plateId;
         this.nationalNumber = nationalNumber;
         this.euroNumber = euroNumber;
     }
 
-    public int getPlateId() {
+    public String getPlateId() {
         return plateId;
     }
 
-    public void setPlateId(int plateId) {
+    public void setPlateId(String plateId) {
         this.plateId = plateId;
     }
 

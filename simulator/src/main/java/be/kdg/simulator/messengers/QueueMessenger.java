@@ -28,13 +28,8 @@ public class QueueMessenger implements Messenger {
 
     @Override
     public void sendMessage(CameraMessage message) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue", objectMapper.writeValueAsString(message));
-        }
-        catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+            rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue", message.toString());
+
         LOGGER.info("Placed: ", message);
     }
 }

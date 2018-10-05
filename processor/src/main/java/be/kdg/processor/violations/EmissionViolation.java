@@ -21,8 +21,9 @@ public class EmissionViolation implements Violation {
     private ObjectMapper objectMapper = new ObjectMapper();
     @Override
     public boolean isViolation(Camera camera, CameraMessage message1, Optional<CameraMessage> message2) {
-        try {
+        try { ;
             Car car = objectMapper.readValue(licensePlateService.get(message1.getLicensePlate()), Car.class);
+            System.out.println("Euronorm auto: " + car.getEuroNumber());
             if (car.getEuroNumber() < camera.getEuroNorm()) {
                 return true;
             }

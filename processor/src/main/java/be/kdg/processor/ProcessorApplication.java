@@ -31,13 +31,7 @@ public class ProcessorApplication {
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(queueName);
         container.setMessageListener(listenerAdapter);
-        container.setMessageConverter(jsonMessageConverter());
         return container;
-    }
-
-    @Bean
-    public MessageConverter jsonMessageConverter(){
-        return new Jackson2JsonMessageConverter();
     }
 
     @Bean

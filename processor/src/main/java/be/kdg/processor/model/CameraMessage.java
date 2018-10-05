@@ -20,6 +20,13 @@ public class CameraMessage {
         this.timestamp = timestamp;
     }
 
+    public CameraMessage(String cameraMessage) {
+        String[] cameraMessageSplit = cameraMessage.split(" ");
+        this.id = Integer.parseInt(cameraMessageSplit[2]);
+        this.licensePlate = cameraMessageSplit[3];
+        this.timestamp = LocalDateTime.parse((cameraMessageSplit[4] + " " + cameraMessageSplit[5]), dateFormat);
+    }
+
     public int getId() {
         return id;
     }
