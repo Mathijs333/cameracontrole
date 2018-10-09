@@ -29,15 +29,16 @@ public class FileGenerator implements MessageGenerator {
     }
 
     public void readCameraMessages() {
-        String fileName = "E:\\Software Architecture\\file.txt";
+        String fileName = "E:\\Software Architecture\\example.csv";
         String textLine;
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((textLine = bufferedReader.readLine()) != null) {
-                textLine = bufferedReader.readLine();
+            while ((textLine = bufferedReader.readLine()) != null && !textLine.isEmpty()) {
                 List<String> splitTextLine = Arrays.asList(textLine.split(","));
-                cameraMessages.put(new CameraMessage(Integer.parseInt(splitTextLine.get(0)), splitTextLine.get(1), LocalDateTime.now()), Integer.parseInt(splitTextLine.get(2)));
+                if (!splitTextLine.get(0).isEmpty() && !splitTextLine.get(1).isEmpty() && !splitTextLine.get(2).isEmpty()) {
+                    cameraMessages.put(new CameraMessage(Integer.parseInt(splitTextLine.get(0)), splitTextLine.get(1), LocalDateTime.now()), Integer.parseInt(splitTextLine.get(2)));
+                }
             }
         }
         catch (Exception ex) {

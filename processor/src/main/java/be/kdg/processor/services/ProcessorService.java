@@ -31,8 +31,7 @@ public class ProcessorService {
             Camera camera = objectMapper.readValue(cameraService.get(5), Camera.class);
             for (Violation violation : violations.values()) {
                 if (violation.isViolation(camera, message, null)) {
-                    System.out.println("Boete, euronorm camera: " + camera.getEuroNorm());
-
+                    System.out.println("Overtreding, euronorm camera: " + camera.getEuroNorm());
                 }
             }
         }

@@ -23,6 +23,8 @@ public class QueueMessengerTest {
 
     @Test
     public void sendMessage() {
-        messenger.sendMessage(messageGenerator.generate());
+        for (int i = 0; i < 10; i++) {
+            messenger.sendMessage(messageGenerator.generate());
+        }
     }
 }

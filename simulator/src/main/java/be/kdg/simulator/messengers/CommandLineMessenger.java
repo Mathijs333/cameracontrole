@@ -17,10 +17,6 @@ import java.text.SimpleDateFormat;
 //b) @ConditionalOnProperty gebruiken
 //dd-MM-yyyy HH:mm:ss:SSS
 public class CommandLineMessenger implements Messenger {
-
-    @Autowired
-    private MessageGenerator messageGenerator;
-
     @Override
     public void sendMessage(CameraMessage message) {
         System.out.println(message);

@@ -1,5 +1,7 @@
 package be.kdg.processor.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -18,13 +20,6 @@ public class CameraMessage {
         this.id = id;
         this.licensePlate = licensePlate;
         this.timestamp = timestamp;
-    }
-
-    public CameraMessage(String cameraMessage) {
-        String[] cameraMessageSplit = cameraMessage.split(" ");
-        this.id = Integer.parseInt(cameraMessageSplit[2]);
-        this.licensePlate = cameraMessageSplit[3];
-        this.timestamp = LocalDateTime.parse((cameraMessageSplit[4] + " " + cameraMessageSplit[5]), dateFormat);
     }
 
     public int getId() {
@@ -67,6 +62,6 @@ public class CameraMessage {
     @Override
     //TODO: datum formatteren volgens dd-MM-yyyy HH:mm:ss:SSS
     public String toString() {
-        return String.format("%d;%s;%s", id, licensePlate, dateFormat.format(timestamp));
+        return String.format("Camera Message: %d %s %s", id, licensePlate, dateFormat.format(timestamp));
     }
 }
