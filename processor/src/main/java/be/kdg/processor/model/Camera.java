@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class Camera {
     private int cameraId;
     private HashMap<String, Double> location;
+    private HashMap<String, Integer> segment;
     private int euroNorm;
 
     public Camera() {
@@ -21,6 +22,20 @@ public class Camera {
         this.cameraId = cameraId;
         this.location = location;
         this.euroNorm = euroNorm;
+    }
+
+    public Camera(int cameraId, HashMap<String, Double> location, HashMap<String, Integer> segment) {
+        this.cameraId = cameraId;
+        this.location = location;
+        this.segment = segment;
+    }
+
+    public HashMap<String, Integer> getSegment() {
+        return segment;
+    }
+
+    public void setSegment(HashMap<String, Integer> segment) {
+        this.segment = segment;
     }
 
     public int getCameraId() {

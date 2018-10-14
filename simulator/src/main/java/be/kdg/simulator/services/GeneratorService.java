@@ -1,14 +1,46 @@
 package be.kdg.simulator.services;
 
+import be.kdg.simulator.generators.FileGenerator;
+import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.messengers.Messenger;
+import be.kdg.simulator.model.CameraMessage;
+import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  * @author Mathijs Constantin
- * @version 1.0 25/09/2018 14:35
+ * @version 1.0 27/09/2018 20:41
  */
-//TODO messengers aanspreken langs services in de plaats van generators?
-@Component
-public interface GeneratorService   {
-    void start();
+//Cameramessage met delay meegeven en deze dan teurg genereren langs service?
+@Service
+public class GeneratorService {
+    @Autowired
+    private MessageGenerator messageGenerator;
+    @Autowired
+    private Messenger messenger;
+
+    @PostConstruct
+    public void start() {
+        do {
+            Pair<CameraMessage, Integer> message = messageGenerator.getFullCameraMessage();
+            messenger.sendMessage(message.getKey());
+            try {
+                Thread.sleep(message.getValue());
+                message.getKey().setTimestamp(LocalDateTime.now());
+                messenger.sendMessage(message.getKey());
+            }
+            catch (Exception ex) {
+                //TODO exception loggen of throwen
+            }
+        }
+        while (true);
+    }
 }

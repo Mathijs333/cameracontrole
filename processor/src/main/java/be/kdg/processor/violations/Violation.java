@@ -2,6 +2,7 @@ package be.kdg.processor.violations;
 
 import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.CameraMessage;
+import javafx.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -11,8 +12,7 @@ import java.util.Optional;
  * @version 1.0 4/10/2018 20:49
  */
 @Component
-//TODO strategie met alle violations? (map en dan in elke methode isviolation uitvoeren)
 public interface Violation {
-    boolean isViolation(Camera camera, CameraMessage message1, Optional<CameraMessage> message2);
-    double calculateFine(Camera camera, CameraMessage message1, Optional<CameraMessage> message2);
+    Pair<Boolean, Integer> isViolation(Camera camera, CameraMessage message1);
+    int calculateFine(int value, int allowedValue);
 }
