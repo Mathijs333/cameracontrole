@@ -17,19 +17,20 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading"><h5>Fine factor</h5>
-                    <small>${}</small>
+                    <small>List of all violation factors</small>
                 </div>
                 <div class="panel-body">
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                   testing
-                                </div>
+                                <table>
+                                    <tr><th>Type</th><th>Factor</th></tr>
+                                <tr th:each="violationfactor : ${violationFactors}">
+                                    <td th:text="${violationfactor.violation}">1</td>
+                                    <td th:text="${violationfactor.factor}">Text ...</td>
+                                </tr>
+                                </table>
                             </div>
-                        </div>
-                        <div class="row">
-                            lolol
                         </div>
 
                 </div>

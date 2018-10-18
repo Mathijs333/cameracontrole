@@ -24,25 +24,19 @@ public class FineService {
 
     public Fine load(Long id) {
         Optional<Fine> fine = fineRepository.findById(id);
-        if (fine.isPresent()) {
-            return fine.get();
-        }
-        return new Fine();
+        return fine.orElseGet(Fine::new);
     }
 
     public List<Fine> load(Boolean approved) {
-        List<Fine> fines = fineRepository.findByApproved(approved);
-            return fines;
+        return fineRepository.findByApproved(approved);
     }
 
     public List<Fine> load() {
-        List<Fine> fines = fineRepository.findAll();
-        return fines;
+        return fineRepository.findAll();
     }
 
     public List<Fine> load(LocalDateTime timestampStart, LocalDateTime timestampEnd) {
-        List<Fine> fines = fineRepository.findAllByTimestampBetween(timestampStart, timestampEnd);
-        return fines;
+        return fineRepository.findAllByTimestampBetween(timestampStart, timestampEnd);
     }
 
     public Fine save(Fine fine) {

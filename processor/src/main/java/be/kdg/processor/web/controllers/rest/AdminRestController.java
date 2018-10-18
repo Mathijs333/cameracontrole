@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 public class AdminRestController {
     private final ModelMapper modelMapper;
     private final AdminService adminService;
-    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
     public AdminRestController(AdminService adminService, ModelMapper modelMapper) {
         this.adminService = adminService;
