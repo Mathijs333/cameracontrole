@@ -1,4 +1,4 @@
-package be.kdg.processor.web.dto;
+package be.kdg.processor.dto;
 
 import be.kdg.processor.model.FineData;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 
 /**
  * @author Mathijs Constantin

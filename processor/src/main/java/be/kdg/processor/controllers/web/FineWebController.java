@@ -1,11 +1,10 @@
-package be.kdg.processor.web.controllers.web;
+package be.kdg.processor.controllers.web;
 
-import be.kdg.processor.model.Factors;
+import be.kdg.processor.dto.FineDTO;
 import be.kdg.processor.model.Fine;
 import be.kdg.processor.model.modelview.ViolationFactor;
 import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.violations.Violation;
-import be.kdg.processor.web.dto.FineDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

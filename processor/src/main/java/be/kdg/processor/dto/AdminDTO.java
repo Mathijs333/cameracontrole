@@ -1,4 +1,4 @@
-package be.kdg.processor.web.dto;
+package be.kdg.processor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -35,6 +35,10 @@ public class FineService {
         return fineRepository.findAll();
     }
 
+    public void delete(Fine fine) {
+        fineRepository.delete(fine);
+    }
+
     public List<Fine> load(LocalDateTime timestampStart, LocalDateTime timestampEnd) {
         return fineRepository.findAllByTimestampBetween(timestampStart, timestampEnd);
     }

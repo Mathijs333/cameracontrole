@@ -1,17 +1,13 @@
-package be.kdg.processor.web.controllers.rest;
+package be.kdg.processor.controllers.rest;
 
+import be.kdg.processor.dto.FineDTO;
 import be.kdg.processor.model.Fine;
 import be.kdg.processor.model.FineData;
-import be.kdg.processor.persistence.FineRepository;
 import be.kdg.processor.persistence.FineService;
-import be.kdg.processor.web.dto.FineDTO;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +41,13 @@ public class FineRestController {
     public ResponseEntity<FineDTO> loadFine(@PathVariable Long id) {
         Fine fine = fineService.load(id);
         return new ResponseEntity<>(modelMapper.map(fine, FineDTO.class), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public HttpStatus deleteFine(@PathVariable Long id) {
+        Fine fine = fineService.load(id);
+        fineService.delete(fine);
+        return HttpStatus.OK;
     }
 
     @PostMapping("/read")

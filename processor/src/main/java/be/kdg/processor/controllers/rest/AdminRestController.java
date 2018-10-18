@@ -1,20 +1,12 @@
-package be.kdg.processor.web.controllers.rest;
+package be.kdg.processor.controllers.rest;
 
 import be.kdg.processor.model.Admin;
-import be.kdg.processor.model.Fine;
-import be.kdg.processor.model.FineData;
-import be.kdg.processor.persistence.AdminRepository;
 import be.kdg.processor.persistence.AdminService;
-import be.kdg.processor.persistence.FineRepository;
-import be.kdg.processor.persistence.FineService;
-import be.kdg.processor.web.dto.AdminDTO;
-import be.kdg.processor.web.dto.FineDTO;
+import be.kdg.processor.dto.AdminDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.format.DateTimeFormatter;
 
 /**
  * @author Mathijs Constantin
@@ -38,17 +30,17 @@ public class AdminRestController {
     }
 
     @GetMapping("/read/{id}")
-    public ResponseEntity<AdminDTO> loadFine(@PathVariable Long id) {
+    public ResponseEntity<AdminDTO> loadAdmin(@PathVariable Long id) {
         Admin admin = adminService.load(id);
         return new ResponseEntity<>(modelMapper.map(admin, AdminDTO.class), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<FineDTO> updateFine(@PathVariable Long id, @RequestParam("username") String username, @RequestParam("password") String password) {
+    public ResponseEntity<AdminDTO> updateAdmin(@PathVariable Long id, @RequestParam("username") String username, @RequestParam("password") String password) {
         Admin adminIn = adminService.load(id);
         adminIn.setUsername(username);
         adminIn.setPassword(password);
         Admin adminOut = adminService.save(adminIn);
-        return new ResponseEntity<>(modelMapper.map(adminOut, FineDTO.class), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelMapper.map(adminOut, AdminDTO.class), HttpStatus.ACCEPTED);
     }
 }
