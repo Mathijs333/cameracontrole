@@ -2,27 +2,42 @@ package be.kdg.simulator.messengers;
 
 import be.kdg.simulator.generators.FileGenerator;
 import be.kdg.simulator.model.CameraMessage;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.http.codec.xml.Jaxb2XmlEncoder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 @ConditionalOnProperty(name = "messenger.type", havingValue = "queue")
 public class QueueMessenger implements Messenger {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
+
+    static final String topicExchangeName = "spring-boot-exchange";
+
+    static final String queueName = "cameraControle";
+
+    @Bean
+    Queue queue() {
+        return new Queue(queueName, false);
+    }
+
+    @Bean
+    TopicExchange exchange() {
+        return new TopicExchange(topicExchangeName);
+    }
+
+    @Bean
+    Binding binding(Queue queue, TopicExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with("cameraControle.queue");
+    }
+
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
@@ -51,6 +66,6 @@ public class QueueMessenger implements Messenger {
         catch (Exception ex) {
             LOGGER.error("Error xml", ex);
         }
-        return null;
+        return "";
     }
 }

@@ -52,7 +52,7 @@ public class FileGenerator implements MessageGenerator {
             cameraMessages.remove(fullCameraMessage.getKey());
             return fullCameraMessage;
         }
-        return null;
+        return new Pair<>(new CameraMessage(), 0);
     }
 
     @Override
@@ -62,6 +62,6 @@ public class FileGenerator implements MessageGenerator {
             cameraMessages.remove(cameraMessage);
             return cameraMessage;
         }
-        return null;
+        return new CameraMessage();
     }
 }

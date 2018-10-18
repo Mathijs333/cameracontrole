@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.json.JsonObject;
+import java.util.Optional;
 
 /**
  * @author Mathijs Constantin
@@ -48,6 +49,6 @@ public class QueueReceiver {
         catch (Exception ex) {
             LOGGER.error("Error xml", ex);
         }
-        return null;
+        return new CameraMessage();
     }
 }

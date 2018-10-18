@@ -64,4 +64,12 @@ public class CameraMessage {
     public String toString() {
         return String.format("Camera Message: %d %s %s", id, licensePlate, dateFormat.format(timestamp));
     }
+
+    public DateTimeFormatter getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(DateTimeFormatter dateFormat) {
+        this.dateFormat = dateFormat;
+    }
 }

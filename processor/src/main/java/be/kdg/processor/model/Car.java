@@ -42,4 +42,6 @@ public class Car {
     public void setEuroNumber(int euroNumber) {
         this.euroNumber = euroNumber;
     }
+
+    
 }

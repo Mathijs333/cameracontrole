@@ -37,4 +37,17 @@ dependencies {
     compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    compileOnly('org.projectlombok:lombok')
+    compile 'org.modelmapper.extensions:modelmapper-spring:2.3.0'
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('com.h2database:h2')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.webjars:webjars-locator-core:0.35')
+    compile('org.webjars:bootstrap:4.1.3')
+    compile('org.webjars:jquery:3.0.0')
+    compile('com.fasterxml.jackson.core:jackson-core')
+    testCompile("junit:junit")
+    compile('com.fasterxml.jackson.core:jackson-databind')
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.9.7'
 }

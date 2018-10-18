@@ -2,12 +2,12 @@ package be.kdg.processor.services;
 
 import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.CameraMessage;
+import be.kdg.processor.model.Fine;
+import be.kdg.processor.persistence.FineRepository;
 import be.kdg.processor.violations.Violation;
-import be.kdg.sa.services.CameraServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,6 +23,8 @@ public class ProcessorService {
     private CameraService cameraService;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private FineRepository fineRepository;
 
     @Autowired
     Map<String, Violation> violations = new HashMap<>();
@@ -32,9 +34,11 @@ public class ProcessorService {
         try {
             Camera camera = objectMapper.readValue(cameraService.get(message.getId()), Camera.class);
             for (Violation violation : violations.values()) {
-                Pair<Boolean, Integer> result = violation.isViolation(camera, message);
+                Pair<Boolean, Fine> result = violation.isViolation(camera, message);
                 if (result.getKey()) {
-                    System.out.printf("\nOvertreding: %s, boete: %d", violation.getClass().getSimpleName(), result.getValue());
+                    Fine fine = result.getValue();
+                    fineRepository.save(fine);
+                    System.out.printf("\nOvertreding: %s, boete: %d : %d test", violation.getClass().getSimpleName(), fine.getAmount(), fine.getId());
                 }
             }
         }

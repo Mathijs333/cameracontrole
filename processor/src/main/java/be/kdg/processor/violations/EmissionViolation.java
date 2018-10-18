@@ -1,16 +1,11 @@
 package be.kdg.processor.violations;
 
-import be.kdg.processor.model.Camera;
-import be.kdg.processor.model.CameraMessage;
-import be.kdg.processor.model.Car;
+import be.kdg.processor.model.*;
 import be.kdg.processor.services.LicensePlateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.Optional;
 
 /**
  * @author Mathijs Constantin
@@ -18,15 +13,15 @@ import java.util.Optional;
  */
 @Component
 public class EmissionViolation implements Violation {
-    private final int factor = 100;
+    private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
 
     @Autowired
     private LicensePlateService licensePlateService;
     private ObjectMapper objectMapper = new ObjectMapper();
     @Override
-    public Pair<Boolean, Integer> isViolation(Camera camera, CameraMessage message1) {
+    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1) {
         if (camera.getEuroNorm() == 0) {
-            return new Pair<>(false, 0);
+            return new Pair<>(false, null);
         }
         try { ;
             Car car = objectMapper.readValue(licensePlateService.get(message1.getLicensePlate()), Car.class);
@@ -34,17 +29,26 @@ public class EmissionViolation implements Violation {
             int euronorm = car.getEuroNumber();
             int allowedEuronorm = camera.getEuroNorm();
             if (euronorm < allowedEuronorm) {
-                return new Pair<>(true, calculateFine(euronorm, allowedEuronorm));
+                FineData fineData = new FineData(message1.getLicensePlate(), message1.getTimestamp(), camera, euronorm, allowedEuronorm, this.getClass().getSimpleName());
+                return new Pair<>(true, new Fine(calculateFine(euronorm, allowedEuronorm), fineData));
             }
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        return new Pair<>(false, 0);
+        return new Pair<>(false, null);
     }
 
     @Override
     public int calculateFine(int value, int allowedValue) {
         return factor;
+    }
+
+    public int getFactor() {
+        return factor;
+    }
+
+    public void setFactor(int factor) {
+        this.factor = factor;
     }
 }

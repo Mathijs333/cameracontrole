@@ -2,6 +2,7 @@ package be.kdg.processor.violations;
 
 import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.CameraMessage;
+import be.kdg.processor.model.Fine;
 import be.kdg.sa.services.CameraServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
@@ -34,14 +35,14 @@ public class ViolationsTest {
     private ObjectMapper objectMapper;
     private CameraMessage cameraMessage = new CameraMessage(1, "1-AZE-123", LocalDateTime.now());
     private CameraMessage cameraMessage2 = new CameraMessage(1, "1-AZE-123", LocalDateTime.now().plusNanos(500000000));
-    private CameraMessage cameraMessage3 = new CameraMessage(4, "1-UAJ-468", LocalDateTime.now());
+    private CameraMessage cameraMessage3 = new CameraMessage(4, "1-ABC-123", LocalDateTime.now());
 
     @Test
     public void SpeedViolation() {
         try {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage.getId()), Camera.class);
             speedViolation.isViolation(camera, cameraMessage);
-            Pair<Boolean, Integer> result = speedViolation.isViolation(camera, cameraMessage2);
+            Pair<Boolean, Fine> result = speedViolation.isViolation(camera, cameraMessage2);
             assertTrue("Speed detectie", result.getKey());
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,7 +53,7 @@ public class ViolationsTest {
     public void EmissionViolation() {
         try {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage3.getId()), Camera.class);
-            Pair<Boolean, Integer> result = emissionViolation.isViolation(camera, cameraMessage3);
+            Pair<Boolean, Fine> result = emissionViolation.isViolation(camera, cameraMessage3);
             assertTrue("Emission detectie", result.getKey());
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,8 +65,8 @@ public class ViolationsTest {
         try {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage.getId()), Camera.class);
             speedViolation.isViolation(camera, cameraMessage);
-            Pair<Boolean, Integer> result = speedViolation.isViolation(camera, cameraMessage2);
-            assertEquals("Speed fine", (long)result.getValue(), (long)160);
+            Pair<Boolean, Fine> result = speedViolation.isViolation(camera, cameraMessage2);
+            assertEquals("Speed fine", (long)result.getValue().getAmount(), (long)160);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,8 +76,8 @@ public class ViolationsTest {
     public void EmissionFine() {
         try {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage3.getId()), Camera.class);
-            Pair<Boolean, Integer> result = emissionViolation.isViolation(camera, cameraMessage3);
-            assertEquals("Emission fine", (long)result.getValue(), (long)100);
+            Pair<Boolean, Fine> result = emissionViolation.isViolation(camera, cameraMessage3);
+            assertEquals("Emission fine", (long)result.getValue().getAmount(), (long)100);
         } catch (IOException e) {
             e.printStackTrace();
         }

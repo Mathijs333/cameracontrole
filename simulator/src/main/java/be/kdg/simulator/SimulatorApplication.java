@@ -15,24 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class SimulatorApplication {
 
-    static final String topicExchangeName = "spring-boot-exchange";
 
-    static final String queueName = "cameraControle";
-
-    @Bean
-    Queue queue() {
-        return new Queue(queueName, false);
-    }
-
-    @Bean
-    TopicExchange exchange() {
-        return new TopicExchange(topicExchangeName);
-    }
-
-    @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("cameraControle.queue");
-    }
 
     @Autowired
     private GeneratorService generatorService;
