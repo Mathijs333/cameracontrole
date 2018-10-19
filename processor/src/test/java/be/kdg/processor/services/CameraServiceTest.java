@@ -3,6 +3,7 @@ package be.kdg.processor.services;
 import be.kdg.processor.model.Camera;
 import be.kdg.sa.services.CameraServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class CameraServiceTest {
             System.out.println(cameraService.get(5));
             ObjectMapper objectMapper = new ObjectMapper();
             Camera camera = objectMapper.readValue(cameraService.get(5), Camera.class);
-            System.out.println(camera.getEuroNorm());
+            Assert.assertNotNull("Euronorm is null", camera.getEuroNorm());
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());

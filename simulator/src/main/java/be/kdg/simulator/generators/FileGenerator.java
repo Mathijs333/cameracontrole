@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,9 +43,13 @@ public class FileGenerator implements MessageGenerator {
                 }
             }
         }
-        catch (Exception ex) {
-            LOGGER.error("There was an error", ex);
+        catch (FileNotFoundException ex) {
+            LOGGER.error("File not found", ex);
         }
+        catch (IOException ex) {
+            LOGGER.error("Reading file went wrong", ex);
+        }
+
     }
 
     public Pair<CameraMessage, Integer> getFullCameraMessage() {

@@ -14,7 +14,6 @@ import java.util.HashMap;
  */
 @Data
 @Entity
-//TODO noargsconstructor annotation bij modelklassen
 public class Camera {
     @Id
     @GeneratedValue

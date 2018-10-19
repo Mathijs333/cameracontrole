@@ -1,11 +1,16 @@
 package be.kdg.processor.violations;
 
 import be.kdg.processor.model.*;
+import be.kdg.processor.persistence.FineRepository;
+import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.services.LicensePlateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Mathijs Constantin
@@ -14,9 +19,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmissionViolation implements Violation {
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
+    @Value("${emissionViolationTimeframe}")
+    private int timeframe;
 
     @Autowired
     private LicensePlateService licensePlateService;
+    @Autowired
+    private FineService fineService;
     private ObjectMapper objectMapper = new ObjectMapper();
     @Override
     public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1) {
@@ -25,10 +34,9 @@ public class EmissionViolation implements Violation {
         }
         try { ;
             Car car = objectMapper.readValue(licensePlateService.get(message1.getLicensePlate()), Car.class);
-            System.out.println("Euronorm auto: " + car.getEuroNumber());
             int euronorm = car.getEuroNumber();
             int allowedEuronorm = camera.getEuroNorm();
-            if (euronorm < allowedEuronorm) {
+            if (euronorm < allowedEuronorm && !fineService.existsFine(message1.getLicensePlate(), LocalDateTime.now().minusHours((long)timeframe), this.getClass().getSimpleName())) {
                 FineData fineData = new FineData(message1.getLicensePlate(), message1.getTimestamp(), camera, euronorm, allowedEuronorm, this.getClass().getSimpleName());
                 return new Pair<>(true, new Fine(calculateFine(euronorm, allowedEuronorm), fineData));
             }

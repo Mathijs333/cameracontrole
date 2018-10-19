@@ -16,26 +16,8 @@ import org.springframework.stereotype.Component;
 @SpringBootApplication
 @Component
 public class ProcessorApplication {
-    static final String topicExchangeName = "spring-boot-exchange";
-
-    static final String queueName = "cameraControle";
 
     public static void main(String[] args) {
         SpringApplication.run(ProcessorApplication.class, args);
-    }
-
-
-    @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueName);
-        container.setMessageListener(listenerAdapter);
-        return container;
-    }
-
-    @Bean
-    MessageListenerAdapter listenerAdapter (QueueReceiver receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 }

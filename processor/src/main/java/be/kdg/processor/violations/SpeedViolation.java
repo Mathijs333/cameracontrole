@@ -2,8 +2,10 @@ package be.kdg.processor.violations;
 
 import be.kdg.processor.model.*;
 import javafx.util.Pair;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
@@ -13,6 +15,8 @@ import java.util.HashMap;
  */
 @Component
 public class SpeedViolation implements Violation {
+    @Value("${speedCameraBufferTime}")
+    private int bufferTime;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
     public HashMap<CameraMessage, Integer> cameraMessages = new HashMap<>();
     @Override
@@ -23,8 +27,10 @@ public class SpeedViolation implements Violation {
         int speedLimit = camera.getSegment().get("speedLimit");
         int connectedCamera = camera.getSegment().get("connectedCameraId");
         for (CameraMessage message1 : cameraMessages.keySet()) {
-            //TODO if om kijken of buffer tijd al verstreken is
-            if (cameraMessages.get(message1) == connectedCamera && message1.getLicensePlate().equals(message2.getLicensePlate())) {
+            if (LocalDateTime.now().minusMinutes((long)bufferTime).isAfter(message1.getTimestamp())) {
+                cameraMessages.remove(message1);
+            }
+            else if (cameraMessages.get(message1) == connectedCamera && message1.getLicensePlate().equals(message2.getLicensePlate())) {
                 int distance = camera.getSegment().get("distance");
                 long millis = ChronoUnit.MILLIS.between(message1.getTimestamp(), message2.getTimestamp());
                 cameraMessages.remove(message1);

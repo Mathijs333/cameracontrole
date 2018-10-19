@@ -16,7 +16,10 @@ import java.util.Random;
 @ConditionalOnProperty(name = "generator.type", havingValue = "random")
 public class RandomMessageGenerator implements MessageGenerator {
     private Random random = new Random();
-    private final static int MAX_ID = 8;
+    @Value("${frequency}")
+    private int frequency;
+    @Value("${maximumId}")
+    private int MAX_ID;
     private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
 
     @Override
@@ -28,11 +31,16 @@ public class RandomMessageGenerator implements MessageGenerator {
 
     @Override
     public Pair<CameraMessage, Integer> getFullCameraMessage() {
-        int minutes = random.nextInt(1000) + 100; //TODO getal veranderen
+        try {
+            Thread.sleep(random.nextInt(1000) * frequency);
+        }
+        catch (InterruptedException ex) {
+            LOGGER.error("Thread interrupted", ex);
+        }
+        int minutes = random.nextInt(1000) + 100;
         return new Pair<>(generate(), minutes);
     }
 
-    //TODO 3 cijfers moeten ook met 0 kunnen beginnen
     public String generateLicensePlate() {
         String licensePlate = "1-";
         for (int i = 0; i < 3; i++) {
@@ -40,5 +48,13 @@ public class RandomMessageGenerator implements MessageGenerator {
         }
         licensePlate += "-" + (random.nextInt(900) + 100);
         return licensePlate;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(int frequency) {
+        this.frequency = frequency;
     }
 }

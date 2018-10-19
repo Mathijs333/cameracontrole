@@ -2,6 +2,7 @@ package be.kdg.simulator.messengers;
 
 import be.kdg.simulator.generators.FileGenerator;
 import be.kdg.simulator.model.CameraMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -19,33 +20,8 @@ import org.springframework.stereotype.Component;
 public class QueueMessenger implements Messenger {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
 
-    static final String topicExchangeName = "spring-boot-exchange";
-
-    static final String queueName = "cameraControle";
-
-    @Bean
-    Queue queue() {
-        return new Queue(queueName, false);
-    }
-
-    @Bean
-    TopicExchange exchange() {
-        return new TopicExchange(topicExchangeName);
-    }
-
-    @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("cameraControle.queue");
-    }
-
     @Autowired
     private AmqpTemplate rabbitTemplate;
-
-    @Value("")
-    private String exchange;
-
-    @Value("")
-    private String routingKey;
 
     @Override
     public void sendMessage(CameraMessage message) {
@@ -63,8 +39,8 @@ public class QueueMessenger implements Messenger {
             String xml = xmlMapper.writeValueAsString(message);
             return xml;
         }
-        catch (Exception ex) {
-            LOGGER.error("Error xml", ex);
+        catch (JsonProcessingException ex) {
+            LOGGER.error("Error processing JSON", ex);
         }
         return "";
     }

@@ -43,6 +43,10 @@ public class FineService {
         return fineRepository.findAllByTimestampBetween(timestampStart, timestampEnd);
     }
 
+    public Boolean existsFine(String licensePlate, LocalDateTime timeframe, String fineType) {
+        return (fineRepository.findAllByTimeframeAndLicenseplateAndFineType(licensePlate, timeframe, fineType).size() > 0);
+    }
+
     public Fine save(Fine fine) {
         return fineRepository.save(fine);
     }

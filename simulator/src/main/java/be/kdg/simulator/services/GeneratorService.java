@@ -5,6 +5,8 @@ import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.messengers.Messenger;
 import be.kdg.simulator.model.CameraMessage;
 import javafx.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,7 @@ import java.util.Random;
 //Cameramessage met delay meegeven en deze dan teurg genereren langs service?
 @Service
 public class GeneratorService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeneratorService.class);
     @Autowired
     private MessageGenerator messageGenerator;
     @Autowired
@@ -37,8 +40,8 @@ public class GeneratorService {
                 message.getKey().setTimestamp(LocalDateTime.now());
                 messenger.sendMessage(message.getKey());
             }
-            catch (Exception ex) {
-                //TODO exception loggen of throwen
+            catch (InterruptedException ex) {
+                LOGGER.error("Thread interrupted", ex);
             }
         }
         while (true);

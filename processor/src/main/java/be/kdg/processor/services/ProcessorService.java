@@ -4,6 +4,7 @@ import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.CameraMessage;
 import be.kdg.processor.model.Fine;
 import be.kdg.processor.persistence.FineRepository;
+import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.violations.Violation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
@@ -24,7 +25,7 @@ public class ProcessorService {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private FineRepository fineRepository;
+    private FineService fineService;
 
     @Autowired
     Map<String, Violation> violations = new HashMap<>();
@@ -37,8 +38,8 @@ public class ProcessorService {
                 Pair<Boolean, Fine> result = violation.isViolation(camera, message);
                 if (result.getKey()) {
                     Fine fine = result.getValue();
-                    fineRepository.save(fine);
-                    System.out.printf("\nOvertreding: %s, boete: %d : %d test", violation.getClass().getSimpleName(), fine.getAmount(), fine.getId());
+                    fineService.save(fine);
+                    System.out.printf("\nOvertreding: %s, boete: %d, id: %d\n", violation.getClass().getSimpleName(), fine.getAmount(), fine.getId());
                 }
             }
         }
