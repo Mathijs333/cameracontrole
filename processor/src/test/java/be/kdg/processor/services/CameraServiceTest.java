@@ -1,6 +1,7 @@
 package be.kdg.processor.services;
 
 import be.kdg.processor.model.Camera;
+import be.kdg.sa.services.CameraNotFoundException;
 import be.kdg.sa.services.CameraServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class CameraServiceTest {
     @Autowired
     private CameraService cameraService;
     @Test
-    public void CallCameraService() throws IOException {
+    public void CallCameraService() throws IOException, CameraNotFoundException {
             System.out.println(cameraService.get(5));
             ObjectMapper objectMapper = new ObjectMapper();
             Camera camera = objectMapper.readValue(cameraService.get(5), Camera.class);

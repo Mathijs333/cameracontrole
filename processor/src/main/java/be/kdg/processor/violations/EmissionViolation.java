@@ -24,8 +24,6 @@ public class EmissionViolation implements Violation {
     private int timeframe;
 
     @Autowired
-    private LicensePlateService licensePlateService;
-    @Autowired
     private FineService fineService;
     @Override
     public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1, Car car) {

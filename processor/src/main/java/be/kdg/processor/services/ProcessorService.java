@@ -22,6 +22,7 @@ import java.util.Map;
 /**
  * @author Mathijs Constantin
  * @version 1.0 4/10/2018 21:31
+ * Class that gets messages and checks them on violations
  */
 @Service
 public class ProcessorService {
