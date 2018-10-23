@@ -20,7 +20,6 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CameraServiceTest {
-    //TODO dit zou wired moeten zijn
     @Autowired
     private CameraService cameraService;
     @Test

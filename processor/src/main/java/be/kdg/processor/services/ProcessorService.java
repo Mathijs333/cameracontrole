@@ -30,8 +30,6 @@ public class ProcessorService {
     @Autowired
     private LicensePlateService licensePlateService;
     @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
     private FineService fineService;
 
     @Autowired
@@ -40,8 +38,8 @@ public class ProcessorService {
     public void receiveCameraMessage(CameraMessage message) throws IOException, CameraNotFoundException, InvalidLicensePlateException, LicensePlateNotFoundException {
         System.out.println(message.toString());
 
-            Camera camera = objectMapper.readValue(cameraService.get(message.getId()), Camera.class);
-            Car car = objectMapper.readValue(licensePlateService.get(message.getLicensePlate()), Car.class);
+            Camera camera = cameraService.getCameraById(message.getId());
+            Car car = licensePlateService.getCarByLicensePlate(message.getLicensePlate());
             for (Violation violation : violations.values()) {
                 Pair<Boolean, Fine> result = violation.isViolation(camera, message, car);
                 if (result.getKey()) {

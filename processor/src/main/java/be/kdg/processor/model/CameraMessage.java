@@ -60,7 +60,6 @@ public class CameraMessage {
     }
 
     @Override
-    //TODO: datum formatteren volgens dd-MM-yyyy HH:mm:ss:SSS
     public String toString() {
         return String.format("Camera Message: %d %s %s", id, licensePlate, dateFormat.format(timestamp));
     }
