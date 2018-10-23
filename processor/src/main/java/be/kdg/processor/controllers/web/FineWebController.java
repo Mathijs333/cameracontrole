@@ -1,20 +1,19 @@
 package be.kdg.processor.controllers.web;
 
 import be.kdg.processor.dto.FineDTO;
+import be.kdg.processor.dto.ViolationFactorDTO;
 import be.kdg.processor.model.Fine;
-import be.kdg.processor.model.modelview.ViolationFactor;
 import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.violations.Violation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.stereotype.Controller;
-
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -43,9 +42,9 @@ public class FineWebController {
     @GetMapping("/factor.do")
     public ModelAndView showFactors(Model model) {
         ModelAndView mav = new ModelAndView("factor");
-        List<ViolationFactor> violationFactors = new ArrayList<>();
+        List<ViolationFactorDTO> violationFactors = new ArrayList<>();
         for (Violation violation : violations.values()) {
-            violationFactors.add(new ViolationFactor(violation.getClass().getSimpleName(), violation.getFactor()));
+            violationFactors.add(new ViolationFactorDTO(violation.getClass().getSimpleName(), violation.getFactor()));
         }
         mav.addObject("violationFactors", violationFactors);
         return mav;

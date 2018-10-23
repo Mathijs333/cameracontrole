@@ -8,11 +8,9 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,24 +22,18 @@ public class QueueMessenger implements Messenger {
     private AmqpTemplate rabbitTemplate;
 
     @Override
-    public void sendMessage(CameraMessage message) {
+    public void sendMessage(CameraMessage message) throws JsonProcessingException {
         if (message != null) {
                 rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue", cameraMessageToXML(message));
                 LOGGER.info("Placed: ", message);
         }
     }
 
-    public String cameraMessageToXML(CameraMessage message) {
-        try {
+    public String cameraMessageToXML(CameraMessage message) throws JsonProcessingException {
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             xmlMapper.registerModule(new JavaTimeModule());
             String xml = xmlMapper.writeValueAsString(message);
             return xml;
-        }
-        catch (JsonProcessingException ex) {
-            LOGGER.error("Error processing JSON", ex);
-        }
-        return "";
     }
 }

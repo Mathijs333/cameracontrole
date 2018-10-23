@@ -9,5 +9,5 @@ import java.util.HashMap;
 @Component
 public interface MessageGenerator {
     CameraMessage generate();
-    Pair<CameraMessage, Integer> getFullCameraMessage();
+    Pair<CameraMessage, Integer> getFullCameraMessage() throws InterruptedException;
 }

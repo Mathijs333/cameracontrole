@@ -20,8 +20,8 @@ public class SpeedViolation implements Violation {
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
     public HashMap<CameraMessage, Integer> cameraMessages = new HashMap<>();
     @Override
-    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message2) {
-        if (camera.getEuroNorm() > 0) {
+    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message2, Car car) {
+        if (camera.getSegment() == null) {
             return new Pair<>(false, null);
         }
         int speedLimit = camera.getSegment().get("speedLimit");

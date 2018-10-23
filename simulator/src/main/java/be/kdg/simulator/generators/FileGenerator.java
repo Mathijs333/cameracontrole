@@ -24,30 +24,22 @@ public class FileGenerator implements MessageGenerator {
     //static list die gebruikt word door generate en timestamp aanpast naar delay, generate handelt deze één voor één af
     //Moet bestand inlezen (cameraID, nummerplaat, delay)
 
-    public FileGenerator() {
+    public FileGenerator() throws FileNotFoundException, IOException {
         if (cameraMessages.isEmpty()) {
             readCameraMessages();
         }
     }
 
-    public void readCameraMessages() {
+    public void readCameraMessages() throws FileNotFoundException, IOException {
         String fileName = "E:\\Software Architecture\\example.csv";
         String textLine;
-        try {
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((textLine = bufferedReader.readLine()) != null && !textLine.isEmpty()) {
-                List<String> splitTextLine = Arrays.asList(textLine.split(","));
-                if (!splitTextLine.get(0).isEmpty() && !splitTextLine.get(1).isEmpty() && !splitTextLine.get(2).isEmpty()) {
-                    cameraMessages.put(new CameraMessage(Integer.parseInt(splitTextLine.get(0)), splitTextLine.get(1), LocalDateTime.now()), Integer.parseInt(splitTextLine.get(2)));
-                }
+        FileReader fileReader = new FileReader(fileName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while ((textLine = bufferedReader.readLine()) != null && !textLine.isEmpty()) {
+            List<String> splitTextLine = Arrays.asList(textLine.split(","));
+            if (!splitTextLine.get(0).isEmpty() && !splitTextLine.get(1).isEmpty() && !splitTextLine.get(2).isEmpty()) {
+                cameraMessages.put(new CameraMessage(Integer.parseInt(splitTextLine.get(0)), splitTextLine.get(1), LocalDateTime.now()), Integer.parseInt(splitTextLine.get(2)));
             }
-        }
-        catch (FileNotFoundException ex) {
-            LOGGER.error("File not found", ex);
-        }
-        catch (IOException ex) {
-            LOGGER.error("Reading file went wrong", ex);
         }
 
     }

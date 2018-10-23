@@ -30,13 +30,8 @@ public class RandomMessageGenerator implements MessageGenerator {
     }
 
     @Override
-    public Pair<CameraMessage, Integer> getFullCameraMessage() {
-        try {
+    public Pair<CameraMessage, Integer> getFullCameraMessage() throws InterruptedException {
             Thread.sleep(random.nextInt(1000) * frequency);
-        }
-        catch (InterruptedException ex) {
-            LOGGER.error("Thread interrupted", ex);
-        }
         int minutes = random.nextInt(1000) + 100;
         return new Pair<>(generate(), minutes);
     }

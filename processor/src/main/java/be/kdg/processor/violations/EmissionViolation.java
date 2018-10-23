@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * @author Mathijs Constantin
@@ -26,14 +27,12 @@ public class EmissionViolation implements Violation {
     private LicensePlateService licensePlateService;
     @Autowired
     private FineService fineService;
-    private ObjectMapper objectMapper = new ObjectMapper();
     @Override
-    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1) {
+    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1, Car car) {
         if (camera.getEuroNorm() == 0) {
             return new Pair<>(false, null);
         }
         try { ;
-            Car car = objectMapper.readValue(licensePlateService.get(message1.getLicensePlate()), Car.class);
             int euronorm = car.getEuroNumber();
             int allowedEuronorm = camera.getEuroNorm();
             if (euronorm < allowedEuronorm && !fineService.existsFine(message1.getLicensePlate(), LocalDateTime.now().minusHours((long)timeframe), this.getClass().getSimpleName())) {

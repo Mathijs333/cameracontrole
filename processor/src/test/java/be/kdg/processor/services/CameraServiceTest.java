@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
+
 /**
  * @author Mathijs Constantin
  * @version 1.0 4/10/2018 20:33
@@ -22,15 +24,10 @@ public class CameraServiceTest {
     @Autowired
     private CameraService cameraService;
     @Test
-    public void CallCameraService() {
-        try {
+    public void CallCameraService() throws IOException {
             System.out.println(cameraService.get(5));
             ObjectMapper objectMapper = new ObjectMapper();
             Camera camera = objectMapper.readValue(cameraService.get(5), Camera.class);
             Assert.assertNotNull("Euronorm is null", camera.getEuroNorm());
-        }
-        catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 }

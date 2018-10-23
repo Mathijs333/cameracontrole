@@ -4,6 +4,7 @@ import be.kdg.simulator.generators.FileGenerator;
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.messengers.Messenger;
 import be.kdg.simulator.model.CameraMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,15 +34,28 @@ public class GeneratorService {
     @PostConstruct
     public void start() {
         do {
-            Pair<CameraMessage, Integer> message = messageGenerator.getFullCameraMessage();
-            messenger.sendMessage(message.getKey());
+            Pair<CameraMessage, Integer> message = null;
+            try {
+                message = messageGenerator.getFullCameraMessage();
+            } catch (InterruptedException e) {
+                LOGGER.error("Error thread interrupted: " + e.getMessage());
+            }
+            try {
+                messenger.sendMessage(message.getKey());
+            } catch (JsonProcessingException e) {
+                LOGGER.error("Error processing json: " + e.getMessage());
+            }
             try {
                 Thread.sleep(message.getValue());
                 message.getKey().setTimestamp(LocalDateTime.now());
-                messenger.sendMessage(message.getKey());
+                try {
+                    messenger.sendMessage(message.getKey());
+                } catch (JsonProcessingException e) {
+                    LOGGER.error("Error processing json: " + e.getMessage());
+                }
             }
             catch (InterruptedException ex) {
-                LOGGER.error("Thread interrupted", ex);
+                LOGGER.error("Error thread interrupted: " + ex.getMessage());
             }
         }
         while (true);

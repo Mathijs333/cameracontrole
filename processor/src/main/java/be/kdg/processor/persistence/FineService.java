@@ -50,4 +50,9 @@ public class FineService {
     public Fine save(Fine fine) {
         return fineRepository.save(fine);
     }
+
+    public void approveFine(Fine fine) {
+        fine.setApproved(true);
+        save(fine);
+    }
 }
