@@ -1,6 +1,9 @@
 package be.kdg.processor.persistence;
 
 import be.kdg.processor.model.Fine;
+import be.kdg.processor.receivers.QueueReceiver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,7 +18,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class FineService {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(FineService.class);
     private final FineRepository fineRepository;
 
     public FineService(FineRepository fineRepository) {
@@ -48,7 +51,9 @@ public class FineService {
     }
 
     public Fine save(Fine fine) {
-        return fineRepository.save(fine);
+        Fine fineOut = fineRepository.save(fine);
+        LOGGER.info("Fine with id " + fine.getId() + " saved");
+        return fineOut;
     }
 
     public Fine approveFine(Fine fine) {

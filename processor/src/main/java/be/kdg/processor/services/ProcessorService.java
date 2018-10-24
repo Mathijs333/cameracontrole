@@ -12,6 +12,8 @@ import be.kdg.sa.services.InvalidLicensePlateException;
 import be.kdg.sa.services.LicensePlateNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,8 @@ public class ProcessorService {
     private LicensePlateService licensePlateService;
     @Autowired
     private FineService fineService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProcessorService.class);
+
 
     @Autowired
     Map<String, Violation> violations = new HashMap<>();
@@ -46,7 +50,7 @@ public class ProcessorService {
                 if (result.getKey()) {
                     Fine fine = result.getValue();
                     fineService.save(fine);
-                    System.out.printf("\nOvertreding: %s, boete: %d, id: %d\n", violation.getClass().getSimpleName(), fine.getAmount(), fine.getId());
+                    LOGGER.info(fine.toString());
                 }
             }
         }

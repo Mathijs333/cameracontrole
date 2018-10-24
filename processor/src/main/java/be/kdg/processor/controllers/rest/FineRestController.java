@@ -73,8 +73,8 @@ public class FineRestController {
         return new ResponseEntity<>(fineDTOS, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<FineDTO> updateFine(@PathVariable Long id, @RequestParam("approved") Boolean approved) {
+    @PutMapping("/update/approve/{id}")
+    public ResponseEntity<FineDTO> approveFine(@PathVariable Long id, @RequestParam("approved") Boolean approved) {
         Fine fineIn = fineService.load(id);
         Fine fineOut = fineService.approveFine(fineIn);
         return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);

@@ -70,4 +70,9 @@ public class Fine {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public String toString() {
+        return String.format("\nOvertreding: %s, boete: %d", fineData.getFineType(), getAmount());
+    }
 }
