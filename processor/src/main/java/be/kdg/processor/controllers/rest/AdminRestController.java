@@ -34,13 +34,4 @@ public class AdminRestController {
         Admin admin = adminService.load(id);
         return new ResponseEntity<>(modelMapper.map(admin, AdminDTO.class), HttpStatus.OK);
     }
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<AdminDTO> updateAdmin(@PathVariable Long id, @RequestParam("username") String username, @RequestParam("password") String password) {
-        Admin adminIn = adminService.load(id);
-        adminIn.setUsername(username);
-        adminIn.setPassword(password);
-        Admin adminOut = adminService.save(adminIn);
-        return new ResponseEntity<>(modelMapper.map(adminOut, AdminDTO.class), HttpStatus.ACCEPTED);
-    }
 }

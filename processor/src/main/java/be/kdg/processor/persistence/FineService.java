@@ -51,8 +51,14 @@ public class FineService {
         return fineRepository.save(fine);
     }
 
-    public void approveFine(Fine fine) {
+    public Fine approveFine(Fine fine) {
         fine.setApproved(true);
-        save(fine);
+        return save(fine);
+    }
+
+    public Fine changeAmount(Fine fine, String comment, int amount) {
+        fine.setComment(comment);
+        fine.setAmount(amount);
+        return save(fine);
     }
 }

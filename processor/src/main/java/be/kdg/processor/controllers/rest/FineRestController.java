@@ -73,15 +73,17 @@ public class FineRestController {
         return new ResponseEntity<>(fineDTOS, HttpStatus.OK);
     }
 
-    //TODO inplaats van model services gebruiken, aparte calls voor setamount en setapproved
     @PutMapping("/update/{id}")
-    public ResponseEntity<FineDTO> updateFine(@PathVariable Long id, @RequestParam("fineData") FineData fineData, @RequestParam("amount") int amount, @RequestParam("approved") Boolean approved, @RequestParam("comment") String comment) {
+    public ResponseEntity<FineDTO> updateFine(@PathVariable Long id, @RequestParam("approved") Boolean approved) {
         Fine fineIn = fineService.load(id);
-        /*fineIn.setFineData(fineData);
-        fineIn.setAmount(amount);
-        fineIn.setApproved(approved);
-        fineIn.setComment(comment);*/
-        Fine fineOut = fineService.save(fineIn);
+        Fine fineOut = fineService.approveFine(fineIn);
+        return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<FineDTO> updateFine(@PathVariable Long id, @RequestParam("amount") int amount, @RequestParam("comment") String comment) {
+        Fine fineIn = fineService.load(id);
+        Fine fineOut = fineService.changeAmount(fineIn, comment, amount);
         return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);
     }
 }
