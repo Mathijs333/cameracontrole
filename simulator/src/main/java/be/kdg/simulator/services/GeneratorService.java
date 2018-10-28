@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpMessageReturnedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,9 @@ public class GeneratorService {
                 messenger.sendMessage(message.getKey());
             } catch (JsonProcessingException e) {
                 LOGGER.error("Error processing json: " + e.getMessage());
+            }
+            catch (AmqpMessageReturnedException e) {
+                LOGGER.error("Error sending to queue: " + e.getMessage());
             }
             try {
                 Thread.sleep(message.getValue());

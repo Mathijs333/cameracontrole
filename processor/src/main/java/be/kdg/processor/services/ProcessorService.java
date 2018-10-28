@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Mathijs Constantin
@@ -46,9 +47,9 @@ public class ProcessorService {
             Camera camera = cameraService.getCameraById(message.getId());
             Car car = licensePlateService.getCarByLicensePlate(message.getLicensePlate());
             for (Violation violation : violations.values()) {
-                Pair<Boolean, Fine> result = violation.isViolation(camera, message, car);
-                if (result.getKey()) {
-                    Fine fine = result.getValue();
+                Optional<Fine> result = violation.isViolation(camera, message, car);
+                if (result.isPresent()) {
+                    Fine fine = result.get();
                     fineService.save(fine);
                     LOGGER.info(fine.toString());
                 }

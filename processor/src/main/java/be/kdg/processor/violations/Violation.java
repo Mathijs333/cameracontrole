@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 @Component
 public interface Violation {
-    Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1, Car car);
+    Optional<Fine> isViolation(Camera camera, CameraMessage message1, Car car);
     int calculateFine(int value, int allowedValue);
     int getFactor();
     void setFactor(int factor);

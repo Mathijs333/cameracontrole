@@ -26,22 +26,24 @@ public class EmissionViolation implements Violation {
     @Autowired
     private FineService fineService;
     @Override
-    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message1, Car car) {
+    public Optional<Fine> isViolation(Camera camera, CameraMessage message1, Car car) {
         if (camera.getEuroNorm() == 0) {
-            return new Pair<>(false, null);
+            return Optional.empty();
         }
         try { ;
             int euronorm = car.getEuroNumber();
             int allowedEuronorm = camera.getEuroNorm();
             if (euronorm < allowedEuronorm && !fineService.existsFine(message1.getLicensePlate(), LocalDateTime.now().minusHours((long)timeframe), this.getClass().getSimpleName())) {
-                FineData fineData = new FineData(message1.getLicensePlate(), message1.getTimestamp(), camera, euronorm, allowedEuronorm, this.getClass().getSimpleName());
-                return new Pair<>(true, new Fine(calculateFine(euronorm, allowedEuronorm), fineData));
+                if (fineService.existsFine(message1.getLicensePlate(), LocalDateTime.now().minusHours((long)timeframe), this.getClass().getSimpleName())) {
+                    return Optional.empty();
+                }
+                return Optional.of(new Fine(calculateFine(euronorm, allowedEuronorm), message1.getLicensePlate(), message1.getTimestamp(), this.getClass().getSimpleName(), euronorm, allowedEuronorm));
             }
         }
         catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        return new Pair<>(false, null);
+        return Optional.empty();
     }
 
     @Override

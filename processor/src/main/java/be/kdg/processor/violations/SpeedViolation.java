@@ -2,12 +2,16 @@ package be.kdg.processor.violations;
 
 import be.kdg.processor.model.*;
 import javafx.util.Pair;
+import net.jodah.expiringmap.ExpiringMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mathijs Constantin
@@ -18,11 +22,11 @@ public class SpeedViolation implements Violation {
     @Value("${speedCameraBufferTime}")
     private int bufferTime;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
-    public HashMap<CameraMessage, Integer> cameraMessages = new HashMap<>();
+    public Map<CameraMessage, Integer> cameraMessages = ExpiringMap.builder().expiration(bufferTime, TimeUnit.MINUTES).build();
     @Override
-    public Pair<Boolean, Fine> isViolation(Camera camera, CameraMessage message2, Car car) {
+    public Optional<Fine> isViolation(Camera camera, CameraMessage message2, Car car) {
         if (camera.getSegment() == null) {
-            return new Pair<>(false, null);
+            return Optional.empty();
         }
         int speedLimit = camera.getSegment().get("speedLimit");
         int connectedCamera = camera.getSegment().get("connectedCameraId");
@@ -36,14 +40,13 @@ public class SpeedViolation implements Violation {
                 cameraMessages.remove(message1);
                 int speed = (int)(distance / (millis / 10));
                 if (speed > speedLimit) {
-                    FineData fineData = new FineData(message1.getLicensePlate(), message2.getTimestamp(), camera, speed, speedLimit, this.getClass().getSimpleName());
-                    return new Pair<>(true, new Fine(calculateFine(speed, speedLimit), fineData));
+                    return Optional.of(new Fine(calculateFine(speed, speedLimit), message1.getLicensePlate(), message2.getTimestamp(), this.getClass().getSimpleName(), speed, speedLimit));
                 }
-                return new Pair<>(false, null);
+                return Optional.empty();
             }
         }
         cameraMessages.put(message2, connectedCamera);
-        return new Pair<>(false, null);
+        return Optional.empty();
     }
 
     @Override

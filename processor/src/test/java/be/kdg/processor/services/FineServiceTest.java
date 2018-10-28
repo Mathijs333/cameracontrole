@@ -2,7 +2,6 @@ package be.kdg.processor.services;
 
 import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.Fine;
-import be.kdg.processor.model.FineData;
 import be.kdg.processor.persistence.FineService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpMessageReturnedException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -22,7 +23,7 @@ public class QueueMessenger implements Messenger {
     private AmqpTemplate rabbitTemplate;
 
     @Override
-    public void sendMessage(CameraMessage message) throws JsonProcessingException {
+    public void sendMessage(CameraMessage message) throws JsonProcessingException, AmqpMessageReturnedException {
         if (message != null) {
                 rabbitTemplate.convertAndSend("spring-boot-exchange", "cameraControle.queue", cameraMessageToXML(message));
                 LOGGER.info("Placed: ", message);

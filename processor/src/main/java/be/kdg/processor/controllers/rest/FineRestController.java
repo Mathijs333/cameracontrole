@@ -2,7 +2,6 @@ package be.kdg.processor.controllers.rest;
 
 import be.kdg.processor.dto.FineDTO;
 import be.kdg.processor.model.Fine;
-import be.kdg.processor.model.FineData;
 import be.kdg.processor.persistence.FineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -74,7 +73,7 @@ public class FineRestController {
     }
 
     @PutMapping("/update/approve/{id}")
-    public ResponseEntity<FineDTO> approveFine(@PathVariable Long id, @RequestParam("approved") Boolean approved) {
+    public ResponseEntity<FineDTO> approveFine(@PathVariable Long id) {
         Fine fineIn = fineService.load(id);
         Fine fineOut = fineService.approveFine(fineIn);
         return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);

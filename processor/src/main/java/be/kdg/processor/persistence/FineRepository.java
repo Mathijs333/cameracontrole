@@ -15,8 +15,8 @@ import java.util.List;
 public interface FineRepository extends JpaRepository<Fine, Long> {
     List<Fine> findByAmount(int amount);
     List<Fine> findByApproved(Boolean approved);
-    @Query("select a from Fine a where a.fineData.timestamp > :timestampStart and a.fineData.timestamp < :timestampEnd")
+    @Query("select a from Fine a where a.timestamp > :timestampStart and a.timestamp < :timestampEnd")
     List<Fine> findAllByTimestampBetween(@Param("timestampStart") LocalDateTime timestampStart, @Param("timestampEnd") LocalDateTime timestampEnd);
-    @Query("select a from Fine a where a.fineData.licensePlate = :licenseplate and a.fineData.timestamp < :timeframe and a.fineData.fineType = :violationType")
+    @Query("select a from Fine a where a.licensePlate = :licenseplate and a.timestamp > :timeframe and a.fineType = :violationType")
     List<Fine> findAllByTimeframeAndLicenseplateAndFineType(@Param("licenseplate") String licenseplate, @Param("timeframe") LocalDateTime timeframe, @Param("violationType") String violationType);
 }

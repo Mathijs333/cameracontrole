@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a40b93b0-ccc9-4b43-a3d7-73f8f6094a88" name="Default Changelist" comment="License genereren om bepaalde tijd">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/processor_main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/processor_main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/processor_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/processor_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/processor/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/FineRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/FineRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/dto/FineDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/dto/FineDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/Fine.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/Fine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/FineData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/ProcessorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/ProcessorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processor/src/test/java/be/kdg/processor/services/FineServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/processor/src/test/java/be/kdg/processor/services/FineServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/QueueMessenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/QueueMessenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/services/GeneratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/services/GeneratorService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/simulator/.gradle/" />
     <ignored path="$PROJECT_DIR$/simulator/build/" />
@@ -95,58 +108,60 @@
     <session id="-811465346">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="23" />
-          <entry key="project.open.time.1" value="4" />
+          <entry key="project.closed" value="28" />
+          <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.10" value="2" />
-          <entry key="project.open.time.11" value="4" />
+          <entry key="project.open.time.11" value="5" />
           <entry key="project.open.time.12" value="5" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.24" value="3" />
-          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="29" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.9" value="2" />
+          <entry key="project.opened" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="1" />
-          <entry key="gradle" value="12" />
+          <entry key="gradle" value="13" />
           <entry key="html" value="4" />
-          <entry key="java" value="408" />
-          <entry key="properties" value="19" />
+          <entry key="java" value="427" />
+          <entry key="properties" value="20" />
           <entry key="thymes" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="12" />
+          <entry key="Groovy" value="13" />
           <entry key="HTML" value="4" />
-          <entry key="JAVA" value="408" />
+          <entry key="JAVA" value="427" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Properties" value="19" />
+          <entry key="Properties" value="20" />
           <entry key="ThymeleafExpressions" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gradle" value="196" />
+          <entry key="gradle" value="222" />
           <entry key="html" value="270" />
-          <entry key="java" value="18297" />
+          <entry key="java" value="19045" />
           <entry key="properties" value="476" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="196" />
+          <entry key="Groovy" value="222" />
           <entry key="HTML" value="270" />
-          <entry key="JAVA" value="18297" />
+          <entry key="JAVA" value="19045" />
           <entry key="Properties" value="476" />
         </counts>
       </usages-collector>
@@ -155,40 +170,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/ProcessorService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="52" column="47" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/Fine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="75" column="91" lean-forward="true" selection-start-line="75" selection-start-column="91" selection-end-line="75" selection-end-column="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/LicensePlateService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="34" lean-forward="true" selection-start-column="34" selection-end-column="34" />
+            <state relative-caret-position="153">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -206,10 +191,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/receivers/QueueReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-262">
+              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="86" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/ProcessorService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="221">
+              <caret line="24" column="126" selection-start-line="24" selection-start-column="126" selection-end-line="24" selection-end-column="126" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/processor/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -217,26 +232,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="20" column="84" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="84" />
+            <state relative-caret-position="340">
+              <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/AdminService.java">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/receivers/QueueReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="86" />
+            <state relative-caret-position="221">
+              <caret line="19" column="87" selection-start-line="19" selection-start-column="87" selection-end-line="19" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -244,8 +250,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="17" column="78" selection-start-line="17" selection-start-column="78" selection-end-line="17" selection-end-column="78" />
+            <state relative-caret-position="187">
+              <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="36" column="154" selection-start-line="36" selection-start-column="154" selection-end-line="36" selection-end-column="154" />
             </state>
           </provider>
         </entry>
@@ -720,9 +735,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$/processor" value="4615234529865" />
+        <entry key="$PROJECT_DIR$/processor" value="4616101716410" />
         <entry key="$PROJECT_DIR$/processor/.gradle" value="0" />
-        <entry key="$PROJECT_DIR$/processor/build.gradle" value="1947775507" />
+        <entry key="$PROJECT_DIR$/processor/build.gradle" value="3607860033" />
         <entry key="$PROJECT_DIR$/processor/settings.gradle" value="1559373882" />
         <entry key="$PROJECT_DIR$/simulator" value="4614088777923" />
         <entry key="$PROJECT_DIR$/simulator/.gradle" value="0" />
@@ -982,7 +997,6 @@
         <option value="$PROJECT_DIR$/processor/src/main/resources/templates/factor.html" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/web/controllers/rest/AdminRestController.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/web/controllers/rest/FineRestController.java" />
-        <option value="$PROJECT_DIR$/processor/build.gradle" />
         <option value="$PROJECT_DIR$/processor/src/test/java/be/kdg/processor/services/FineServiceTest.java" />
         <option value="$PROJECT_DIR$/processor/src/test/java/be/kdg/processor/web/FineWebControllerTest.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/FineDTO.java" />
@@ -998,33 +1012,34 @@
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/ProcessorApplication.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/config/QueueConfiguration.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/QueueConfiguration.java" />
         <option value="$PROJECT_DIR$/processor/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java" />
         <option value="$PROJECT_DIR$/processor/src/test/java/be/kdg/processor/violations/ViolationsTest.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/dto/ViolationFactor.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/web/FineWebController.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/CommandLineMessenger.java" />
-        <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/QueueMessenger.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/Messenger.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/generators/FileGenerator.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/generators/RandomMessageGenerator.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/generators/MessageGenerator.java" />
-        <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/services/GeneratorService.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/receivers/QueueReceiver.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/CameraService.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/LicensePlateService.java" />
         <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/model/CameraMessage.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/CameraMessage.java" />
         <option value="$PROJECT_DIR$/processor/src/test/java/be/kdg/processor/services/CameraServiceTest.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/AdminRestController.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/FineRestController.java" />
-        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineService.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/QueueConfiguration.java" />
+        <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/QueueMessenger.java" />
+        <option value="$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/services/GeneratorService.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/Fine.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineService.java" />
         <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/ProcessorService.java" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java" />
+        <option value="$PROJECT_DIR$/processor/build.gradle" />
+        <option value="$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java" />
       </list>
     </option>
   </component>
@@ -1048,9 +1063,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1386,6 +1398,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1396,9 +1411,9 @@
     <property name="SearchEverywhereHistoryKey" value="return null&#9;PSI&#9;JAVA://org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540329752973" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540757945231" />
     <property name="jdk.selected.JAVA_MODULE" value="10" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/project-sa-examples/Rest-Jonas" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/sa-project/security" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -1440,7 +1455,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ProcessorApplication">
+  <component name="RunManager" selected="Gradle.processor">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -1452,6 +1467,22 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="processor" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/processor" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method v="2" />
     </configuration>
     <configuration name="CameraServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="processor_test" />
@@ -1478,21 +1509,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="be.kdg.processor.web" />
       <option name="MAIN_CLASS_NAME" value="be.kdg.processor.web.FineRestControllerTest" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FineServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="processor_test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="be.kdg.processor.services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="be.kdg.processor.services" />
-      <option name="MAIN_CLASS_NAME" value="be.kdg.processor.services.FineServiceTest" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -1569,18 +1585,18 @@
       <item itemvalue="Spring Boot.SimulatorApplication" />
       <item itemvalue="Spring Boot.ProcessorApplication" />
       <item itemvalue="JUnit.QueueMessengerTest" />
-      <item itemvalue="JUnit.FineServiceTest" />
       <item itemvalue="JUnit.FineWebControllerTest" />
       <item itemvalue="JUnit.FineRestControllerTest" />
       <item itemvalue="JUnit.CameraServiceTest" />
+      <item itemvalue="Gradle.processor" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.processor" />
         <item itemvalue="JUnit.CameraServiceTest" />
         <item itemvalue="JUnit.QueueMessengerTest" />
         <item itemvalue="JUnit.FineWebControllerTest" />
         <item itemvalue="JUnit.FineRestControllerTest" />
-        <item itemvalue="JUnit.FineServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -1631,7 +1647,13 @@
       <workItem from="1539938015232" duration="11029000" />
       <workItem from="1540290212018" duration="6062000" />
       <workItem from="1540322573837" duration="3362000" />
-      <workItem from="1540365533941" duration="1355000" />
+      <workItem from="1540365533941" duration="1660000" />
+      <workItem from="1540475922021" duration="628000" />
+      <workItem from="1540538985457" duration="591000" />
+      <workItem from="1540543334202" duration="30000" />
+      <workItem from="1540543615356" duration="606000" />
+      <workItem from="1540560781786" duration="21000" />
+      <workItem from="1540742557434" duration="6444000" />
     </task>
     <task id="LOCAL-00001" summary="License genereren om bepaalde tijd">
       <created>1537880900746</created>
@@ -1676,7 +1698,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131261000" />
+    <option name="totallyTimeSpent" value="139886000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1691,7 +1713,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24946696" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26439232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1701,11 +1723,11 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.329718" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.329718" />
@@ -1713,7 +1735,7 @@
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3264642" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run Dashboard" order="14" weight="0.329718" />
+      <window_info anchor="bottom" id="Run Dashboard" order="14" weight="0.3286334" />
       <window_info anchor="bottom" id="Java Enterprise" order="15" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1747,41 +1769,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/services/FileGeneratorServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/messengers/CommandLineMessengerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/generators/RandomMessageGeneratorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="74" selection-start-line="25" selection-start-column="74" selection-end-line="25" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/dto/FineDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1909,31 +1896,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/QueueMessenger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="25" column="30" lean-forward="true" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/services/GeneratorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="40" column="61" lean-forward="true" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/SimulatorApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/QueueConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1948,20 +1914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/ProcessorApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -1986,27 +1938,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/web/FineWebController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/AdminRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/FineData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="27" selection-start-line="27" selection-end-line="29" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -2021,26 +1956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="434">
           <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/FineRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/receivers/QueueReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="86" />
         </state>
       </provider>
     </entry>
@@ -2051,31 +1966,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/2.0.5.RELEASE/345d299a67dc64b34b4a8b7f13a99f09d271384b/spring-boot-autoconfigure-2.0.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="78" selection-start-line="17" selection-start-column="78" selection-end-line="17" selection-end-column="78" />
+        <state relative-caret-position="197">
+          <caret line="484" column="44" selection-start-line="484" selection-start-column="44" selection-end-line="484" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java">
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/web/FineWebController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="170">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/controllers/rest/FineRestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="78" column="55" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/config/QueueConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/services/MessageGeneratorServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/services/GeneratorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="49" column="74" selection-start-line="49" selection-start-column="74" selection-end-line="49" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/ProcessorApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/FineData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/test/java/be/kdg/simulator/services/FileGeneratorServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator/src/main/java/be/kdg/simulator/messengers/QueueMessenger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="25" column="111" selection-start-line="25" selection-start-column="111" selection-end-line="25" selection-end-column="111" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/model/Fine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="75" column="91" lean-forward="true" selection-start-line="75" selection-start-column="91" selection-end-line="75" selection-end-column="91" />
+        <state relative-caret-position="459">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#1059#1060#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1118#1119#0" expanded="true" />
+            <element signature="e#1146#1147#0" expanded="true" />
+            <element signature="e#1176#1177#0" expanded="true" />
+            <element signature="e#1205#1206#0" expanded="true" />
+            <element signature="e#1246#1247#0" expanded="true" />
+            <element signature="e#1282#1283#0" expanded="true" />
+            <element signature="e#1318#1319#0" expanded="true" />
+            <element signature="e#1349#1350#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+            <element signature="e#1438#1439#0" expanded="true" />
+            <element signature="e#1472#1473#0" expanded="true" />
+            <element signature="e#1502#1503#0" expanded="true" />
+            <element signature="e#1548#1549#0" expanded="true" />
+            <element signature="e#1586#1587#0" expanded="true" />
+            <element signature="e#1625#1626#0" expanded="true" />
+            <element signature="e#1660#1661#0" expanded="true" />
+            <element signature="e#1716#1717#0" expanded="true" />
+            <element signature="e#1764#1765#0" expanded="true" />
+            <element signature="e#1807#1808#0" expanded="true" />
+            <element signature="e#1839#1840#0" expanded="true" />
+            <element signature="e#1896#1897#0" expanded="true" />
+            <element signature="e#1938#1939#0" expanded="true" />
+            <element signature="e#1973#1974#0" expanded="true" />
+            <element signature="e#2004#2005#0" expanded="true" />
+            <element signature="e#2052#2053#0" expanded="true" />
+            <element signature="e#2092#2093#0" expanded="true" />
+            <element signature="e#2121#2122#0" expanded="true" />
+            <element signature="e#2149#2150#0" expanded="true" />
+            <element signature="e#2188#2189#0" expanded="true" />
+            <element signature="e#2222#2223#0" expanded="true" />
+            <element signature="e#2254#2255#0" expanded="true" />
+            <element signature="e#2285#2286#0" expanded="true" />
+            <element signature="e#2330#2331#0" expanded="true" />
+            <element signature="e#2370#2371#0" expanded="true" />
+            <element signature="e#2416#2417#0" expanded="true" />
+            <element signature="e#2512#2513#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/LicensePlateService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="34" lean-forward="true" selection-start-column="34" selection-end-column="34" />
+        <state relative-caret-position="153">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2089,27 +2113,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java">
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/receivers/QueueReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        <state relative-caret-position="-262">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/Violation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="19" column="87" selection-start-line="19" selection-start-column="87" selection-end-line="19" selection-end-column="87" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/persistence/FineService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="84" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="84" />
+        <state relative-caret-position="340">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/services/ProcessorService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="52" column="47" selection-start-line="52" selection-start-column="47" selection-end-line="52" selection-end-column="47" />
+        <state relative-caret-position="299">
+          <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/EmissionViolation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="36" column="154" selection-start-line="36" selection-start-column="154" selection-end-line="36" selection-end-column="154" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processor/src/main/java/be/kdg/processor/violations/SpeedViolation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="24" column="126" selection-start-line="24" selection-start-column="126" selection-end-line="24" selection-end-column="126" />
         </state>
       </provider>
     </entry>
