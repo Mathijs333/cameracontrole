@@ -52,4 +52,7 @@ dependencies {
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.9.7'
     compile('javax.xml.bind:jaxb-api:2.3.0')
     compile('net.jodah:expiringmap:0.5.8')
+    compile("org.springframework.boot:spring-boot-starter-security")
+    testCompile("org.springframework.security:spring-security-test")
+    compile("org.springframework.boot:spring-boot-starter-cache")
 }

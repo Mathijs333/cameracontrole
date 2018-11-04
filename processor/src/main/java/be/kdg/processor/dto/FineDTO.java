@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 /**
  * @author Mathijs Constantin
@@ -16,15 +17,20 @@ import javax.validation.constraints.NotEmpty;
 public class FineDTO {
     @NotEmpty
     private int amount;
-
     @NotEmpty
     private Boolean approved;
-
     @NotEmpty
     private String comment;
-
     @NotEmpty
-    private FineData fineData;
+    private String licensePlate;
+    @NotEmpty
+    private LocalDateTime timestamp;
+    @NotEmpty
+    private String fineType;
+    @NotEmpty
+    private int value;
+    @NotEmpty
+    private int maxValue;
 
     public int getAmount() {
         return amount;
@@ -32,14 +38,6 @@ public class FineDTO {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public FineData getFineData() {
-        return fineData;
-    }
-
-    public void setFineData(FineData fineData) {
-        this.fineData = fineData;
     }
 
     public Boolean getApproved() {
@@ -56,5 +54,45 @@ public class FineDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getFineType() {
+        return fineType;
+    }
+
+    public void setFineType(String fineType) {
+        this.fineType = fineType;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
     }
 }

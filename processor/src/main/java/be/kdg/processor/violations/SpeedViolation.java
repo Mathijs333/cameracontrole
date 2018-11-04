@@ -1,8 +1,10 @@
 package be.kdg.processor.violations;
 
 import be.kdg.processor.model.*;
+import be.kdg.processor.persistence.SettingsService;
 import javafx.util.Pair;
 import net.jodah.expiringmap.ExpiringMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +21,18 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class SpeedViolation implements Violation {
+    @Autowired
+    private SettingsService settingsService;
     @Value("${speedCameraBufferTime}")
     private int bufferTime;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
-    public Map<CameraMessage, Integer> cameraMessages = ExpiringMap.builder().expiration(bufferTime, TimeUnit.MINUTES).build();
+    private Map<CameraMessage, Integer> cameraMessages = ExpiringMap.builder().expiration(bufferTime, TimeUnit.MINUTES).build();
     @Override
     public Optional<Fine> isViolation(Camera camera, CameraMessage message2, Car car) {
+        Settings settings = settingsService.load().get();
+        bufferTime = settings.getBufferTime();
+        factor = settings.getViolationFactors().get(this.getClass().getSimpleName());
+
         if (camera.getSegment() == null) {
             return Optional.empty();
         }

@@ -6,12 +6,14 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author Mathijs Constantin
  * @version 1.0 19/10/2018 13:46
  */
 @Configuration
+@EnableScheduling
 public class QueueConfiguration {
     public static final String topicExchangeName = "spring-boot-exchange";
 

@@ -16,8 +16,6 @@ public class Fine {
     @GeneratedValue
     private Long id;
     private int amount;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_fineData")
     private Boolean approved;
     private String comment;
     private String licensePlate;

@@ -16,12 +16,13 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin {
+public class User {
     @Id
     @GeneratedValue
     private long id;
     private String username;
     private String password;
+
 
     public long getId() {
         return id;

@@ -7,10 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,7 +28,7 @@ public class FileGenerator implements MessageGenerator {
     }
 
     public void readCameraMessages() throws FileNotFoundException, IOException {
-        String fileName = "E:\\Software Architecture\\example.csv";
+        File fileName = new File(getClass().getResource("messages.csv").getFile());
         String textLine;
         FileReader fileReader = new FileReader(fileName);
         BufferedReader bufferedReader = new BufferedReader(fileReader);

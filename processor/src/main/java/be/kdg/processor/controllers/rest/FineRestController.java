@@ -20,6 +20,7 @@ import java.util.Map;
  */
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = "/api/fine")
+@ControllerAdvice
 public class FineRestController {
     private final ModelMapper modelMapper;
     private final FineService fineService;
@@ -85,4 +86,6 @@ public class FineRestController {
         Fine fineOut = fineService.changeAmount(fineIn, comment, amount);
         return new ResponseEntity<>(modelMapper.map(fineOut, FineDTO.class), HttpStatus.ACCEPTED);
     }
+
+
 }

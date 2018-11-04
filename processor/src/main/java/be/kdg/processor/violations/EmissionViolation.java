@@ -3,6 +3,7 @@ package be.kdg.processor.violations;
 import be.kdg.processor.model.*;
 import be.kdg.processor.persistence.FineRepository;
 import be.kdg.processor.persistence.FineService;
+import be.kdg.processor.persistence.SettingsService;
 import be.kdg.processor.services.LicensePlateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
@@ -19,6 +20,7 @@ import java.util.Optional;
  */
 @Component
 public class EmissionViolation implements Violation {
+    private SettingsService settingsService;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
     @Value("${emissionViolationTimeframe}")
     private int timeframe;
@@ -27,6 +29,9 @@ public class EmissionViolation implements Violation {
     private FineService fineService;
     @Override
     public Optional<Fine> isViolation(Camera camera, CameraMessage message1, Car car) {
+        Settings settings = settingsService.load().get();
+        factor = settings.getViolationFactors().get(this.getClass().getSimpleName());
+        timeframe = settingsService.load().get().getTimeframeEmission();
         if (camera.getEuroNorm() == 0) {
             return Optional.empty();
         }

@@ -6,6 +6,7 @@ import be.kdg.sa.services.CameraServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import be.kdg.processor.model.Camera;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.io.IOException;
 public class CameraService extends CameraServiceProxy{
     @Autowired
     private ObjectMapper objectMapper;
+    @Cacheable("cameras")
     public Camera getCameraById(int id) throws IOException, CameraNotFoundException {
         return objectMapper.readValue(get(id), Camera.class);
     }

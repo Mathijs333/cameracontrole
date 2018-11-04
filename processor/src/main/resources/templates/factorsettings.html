@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" th:href="@{/images/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" media="screen"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" media="screen"/>
+
+    <!-- Scripts -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h5>Fine factor</h5>
+                    <small>List of all violation factors</small>
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table>
+                                <tr><th>Type</th><th>Factor</th></tr>
+                                <form th:action="@{/settings/violationfactors}" method="post">
+                                <tr th:each="violationfactor : ${violationFactors}">
+                                    <td th:text="${violationfactor.violation}">1</td>
+                                    <td><input th:value="${violationfactor.factor}" th:name="${violationfactor.violation}"  type="text" ></td>
+                                </tr>
+                                    <input type="submit" value="Update factors">
+                                </form>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

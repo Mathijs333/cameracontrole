@@ -4,20 +4,14 @@ import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.CameraMessage;
 import be.kdg.processor.model.Car;
 import be.kdg.processor.model.Fine;
-import be.kdg.processor.persistence.FineRepository;
 import be.kdg.processor.persistence.FineService;
+import be.kdg.processor.exceptions.MessageProcessingException;
 import be.kdg.processor.violations.Violation;
-import be.kdg.sa.services.CameraNotFoundException;
-import be.kdg.sa.services.InvalidLicensePlateException;
-import be.kdg.sa.services.LicensePlateNotFoundException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -40,19 +34,22 @@ public class ProcessorService {
 
     @Autowired
     Map<String, Violation> violations = new HashMap<>();
-
-    public void receiveCameraMessage(CameraMessage message) throws IOException, CameraNotFoundException, InvalidLicensePlateException, LicensePlateNotFoundException {
-        System.out.println(message.toString());
-
-            Camera camera = cameraService.getCameraById(message.getId());
-            Car car = licensePlateService.getCarByLicensePlate(message.getLicensePlate());
-            for (Violation violation : violations.values()) {
-                Optional<Fine> result = violation.isViolation(camera, message, car);
-                if (result.isPresent()) {
-                    Fine fine = result.get();
-                    fineService.save(fine);
-                    LOGGER.info(fine.toString());
+    public void receiveCameraMessage(CameraMessage message) throws MessageProcessingException {
+            System.out.println(message.toString());
+            try {
+                Camera camera = cameraService.getCameraById(message.getId());
+                Car car = licensePlateService.getCarByLicensePlate(message.getLicensePlate());
+                for (Violation violation : violations.values()) {
+                    Optional<Fine> result = violation.isViolation(camera, message, car);
+                    if (result.isPresent()) {
+                        Fine fine = result.get();
+                        fineService.save(fine);
+                        LOGGER.info(fine.toString());
+                    }
                 }
+            }
+            catch (Exception ex) {
+                throw new MessageProcessingException(ex.getMessage());
             }
         }
 
