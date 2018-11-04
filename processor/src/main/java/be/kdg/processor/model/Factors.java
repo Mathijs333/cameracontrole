@@ -5,7 +5,7 @@ package be.kdg.processor.model;
  * @version 1.0 18/10/2018 15:51
  */
 public enum Factors {
-    EmissionViolation(100), SpeedViolation(10);
+    EmissionViolationManager(100), SpeedViolationManager(10);
 
     private int value;
 

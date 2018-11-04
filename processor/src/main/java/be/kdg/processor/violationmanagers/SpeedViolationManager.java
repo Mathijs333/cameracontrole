@@ -1,8 +1,7 @@
-package be.kdg.processor.violations;
+package be.kdg.processor.violationmanagers;
 
 import be.kdg.processor.model.*;
 import be.kdg.processor.persistence.SettingsService;
-import javafx.util.Pair;
 import net.jodah.expiringmap.ExpiringMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0 9/10/2018 15:09
  */
 @Component
-public class SpeedViolation implements Violation {
+public class SpeedViolationManager implements ViolationManager {
     @Autowired
     private SettingsService settingsService;
     @Value("${speedCameraBufferTime}")

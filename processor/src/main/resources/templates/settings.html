@@ -14,22 +14,23 @@
 <body>
 <div class="container">
     <div class="row">
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+
         <div class="col-md-8 col-md-offset-2">
+            <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
             <div class="panel panel-default">
-                <div class="panel-heading"><h5>Fine factor</h5>
-                    <small>List of all violation factors</small>
+                <div class="panel-heading"><h5>Settings</h5>
                 </div>
                 <div class="panel-body">
 
                     <div class="row">
                         <div class="col-md-12">
+                            <form th:action="@{/settings}" method="post">
                             <table>
                                 <tr><th>Type</th><th>Factor</th></tr>
-                                <form th:action="@{/settings}" method="post">
+
                                     <tr>
                                         <td>bufferTime</td>
                                         <td><input th:value="${settings.bufferTime}" th:name="bufferTime" type="text" ></td>
@@ -40,9 +41,12 @@
                                         <td><input th:value="${settings.retryDelay}" th:name="retryDelay" type="text" ></td></tr>
                                     <tr><td>retryCount</td>
                                         <td><input th:value="${settings.retryCount}" th:name="retryCount" type="text" ></td></tr>
-                                    <input type="submit" value="Update settings">
-                                </form>
+
+
+
                             </table>
+                            <input type="submit" value="Update settings">
+                            </form>
                         </div>
                     </div>
 

@@ -1,10 +1,9 @@
-package be.kdg.processor.violations;
+package be.kdg.processor.violationmanagers;
 
 import be.kdg.processor.model.Camera;
 import be.kdg.processor.model.CameraMessage;
 import be.kdg.processor.model.Car;
 import be.kdg.processor.model.Fine;
-import be.kdg.processor.services.LicensePlateService;
 import be.kdg.sa.services.CameraServiceProxy;
 import be.kdg.sa.services.LicensePlateServiceProxy;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,8 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Mathijs Constantin
@@ -33,9 +30,9 @@ public class ViolationsTest {
     @Autowired
     private LicensePlateServiceProxy licensePlateServiceProxy;
     @Autowired
-    private SpeedViolation speedViolation;
+    private SpeedViolationManager speedViolation;
     @Autowired
-    private EmissionViolation emissionViolation;
+    private EmissionViolationManager emissionViolation;
     @Autowired
     private ObjectMapper objectMapper;
     private CameraMessage cameraMessage = new CameraMessage(1, "1-AZE-123", LocalDateTime.now());
@@ -48,8 +45,8 @@ public class ViolationsTest {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage.getLicensePlate()), Car.class);
             speedViolation.isViolation(camera, cameraMessage, car);
-            Pair<Boolean, Fine> result = speedViolation.isViolation(camera, cameraMessage2, car);
-            assertTrue("Speed detectie", result.getKey());
+            Boolean result = speedViolation.isViolation(camera, cameraMessage2, car).isPresent();
+            assertTrue("Speed detectie", result);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,8 +57,8 @@ public class ViolationsTest {
         try {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage3.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage3.getLicensePlate()), Car.class);
-            Pair<Boolean, Fine> result = emissionViolation.isViolation(camera, cameraMessage3, car);
-            assertTrue("Emission detectie", result.getKey());
+            Boolean result = emissionViolation.isViolation(camera, cameraMessage3, car).isPresent();
+            assertTrue("Emission detectie", result);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,8 +70,8 @@ public class ViolationsTest {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage2.getLicensePlate()), Car.class);
             speedViolation.isViolation(camera, cameraMessage, car);
-            Pair<Boolean, Fine> result = speedViolation.isViolation(camera, cameraMessage2, car);
-            assertEquals("Speed fine", (long)result.getValue().getAmount(), (long)160);
+            int result = speedViolation.calculateFine(80,70);
+            assertEquals("Speed fine", (long)result, (long)100);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,7 +81,7 @@ public class ViolationsTest {
     public void EmissionFine() throws  IOException {
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage3.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage3.getLicensePlate()), Car.class);
-            Pair<Boolean, Fine> result = emissionViolation.isViolation(camera, cameraMessage3, car);
-            assertEquals("Emission fine", (long)result.getValue().getAmount(), (long)100);
+            int result = emissionViolation.calculateFine(1,2);
+            assertEquals("Emission fine", (long)result, (long)100);
     }
 }

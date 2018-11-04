@@ -6,7 +6,7 @@ import be.kdg.processor.model.Car;
 import be.kdg.processor.model.Fine;
 import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.exceptions.MessageProcessingException;
-import be.kdg.processor.violations.Violation;
+import be.kdg.processor.violationmanagers.ViolationManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +33,13 @@ public class ProcessorService {
 
 
     @Autowired
-    Map<String, Violation> violations = new HashMap<>();
+    Map<String, ViolationManager> violations = new HashMap<>();
     public void receiveCameraMessage(CameraMessage message) throws MessageProcessingException {
             System.out.println(message.toString());
             try {
                 Camera camera = cameraService.getCameraById(message.getId());
                 Car car = licensePlateService.getCarByLicensePlate(message.getLicensePlate());
-                for (Violation violation : violations.values()) {
+                for (ViolationManager violation : violations.values()) {
                     Optional<Fine> result = violation.isViolation(camera, message, car);
                     if (result.isPresent()) {
                         Fine fine = result.get();

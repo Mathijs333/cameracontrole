@@ -3,6 +3,7 @@ package be.kdg.processor.config;
 import be.kdg.processor.persistence.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,21 +17,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @version 1.0 1/11/2018 14:35
  */
 @Configuration
-/*@EnableWebSecurity*/
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
-    @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
-        auth.authenticationProvider(authProvider());
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/api/user/test", "/api/user/read", "/api/user/read/{id}", "/api/user/test2").permitAll()
+                .antMatchers("/", "/api/user/test", "/api/user/read", "/api/user/delete/{id}", "/api/user/update/{id}", "/api/user/create", "/api/user/read/{id}", "/api/user/test2").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -45,9 +41,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider= new DaoAuthenticationProvider();
-       /* authProvider.setPasswordEncoder(passwordEncoder());*/
-        authProvider.setUserDetailsService(userService);//
+        authProvider.setUserDetailsService(userService);
+        /*authProvider.setPasswordEncoder(passwordEncoder());*/
         return authProvider;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider());
     }
 
     @Bean

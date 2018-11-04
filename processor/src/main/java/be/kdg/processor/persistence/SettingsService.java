@@ -2,7 +2,6 @@ package be.kdg.processor.persistence;
 
 import be.kdg.processor.dto.ViolationFactorDTO;
 import be.kdg.processor.model.Settings;
-import be.kdg.processor.violations.Violation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
 
-import be.kdg.processor.model.Camera;
-import be.kdg.processor.model.CameraMessage;
-import be.kdg.processor.model.Car;
-import be.kdg.processor.model.Fine;
-import be.kdg.processor.persistence.FineService;
-import be.kdg.processor.exceptions.MessageProcessingException;
-import be.kdg.processor.violations.Violation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import be.kdg.processor.violationmanagers.ViolationManager;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -46,11 +35,11 @@ public class SettingsService {
     @Autowired
     private SettingsRepository settingsRepository;
     @Autowired
-    private List<Violation> violations;
+    private List<ViolationManager> violations;
 
     public void initiate() {
         HashMap<String, Integer> violationFactors = new HashMap<>();
-        for (Violation violation : violations) {
+        for (ViolationManager violation : violations) {
             violationFactors.put(violation.getClass().getSimpleName(), violation.getFactor());
         }
         if (!settingsRepository.findById((long)1).isPresent()) {

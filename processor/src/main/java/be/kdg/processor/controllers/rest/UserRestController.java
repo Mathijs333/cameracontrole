@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -20,10 +21,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/user")
 @ControllerAdvice
 public class UserRestController {
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
     private final UserService userService;
+
 
     public UserRestController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
@@ -32,7 +32,7 @@ public class UserRestController {
 
     @PostMapping("/create")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        userDTO.setPassword((userDTO.getPassword()));
+        userDTO.setPassword(userDTO.getPassword());
         User user = userService.save(modelMapper.map(userDTO, User.class));
         return new ResponseEntity<>(modelMapper.map(user, UserDTO.class), HttpStatus.CREATED);
     }
@@ -53,16 +53,10 @@ public class UserRestController {
         return new ResponseEntity<>(modelMapper.map(userOut, UserDTO.class), HttpStatus.CREATED);
     }
 
-    @GetMapping("/test2")
-    public ResponseEntity<UserDTO> test2() {
-        User user = userService.load("mathijs");
-        return new ResponseEntity<>(modelMapper.map(user, UserDTO.class), HttpStatus.CREATED);
-    }
-
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestParam("username") String username, @RequestParam("password") String password) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         User userIn = userService.load(id);
-        User userOut = userService.updateUser(userIn, username, password);
+        User userOut = userService.updateUser(userIn, userDTO.getUsername(), userDTO.getPassword());
         return new ResponseEntity<>(modelMapper.map(userOut, UserDTO.class), HttpStatus.ACCEPTED);
     }
 
@@ -70,6 +64,6 @@ public class UserRestController {
     public HttpStatus deleteUser(@PathVariable Long id) {
         User user = userService.load(id);
         userService.delete(user);
-        return HttpStatus.OK;
+        return HttpStatus.GONE;
     }
 }

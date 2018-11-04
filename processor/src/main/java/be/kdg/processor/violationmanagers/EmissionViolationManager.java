@@ -1,12 +1,8 @@
-package be.kdg.processor.violations;
+package be.kdg.processor.violationmanagers;
 
 import be.kdg.processor.model.*;
-import be.kdg.processor.persistence.FineRepository;
 import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.persistence.SettingsService;
-import be.kdg.processor.services.LicensePlateService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -19,7 +15,7 @@ import java.util.Optional;
  * @version 1.0 4/10/2018 20:51
  */
 @Component
-public class EmissionViolation implements Violation {
+public class EmissionViolationManager implements ViolationManager {
     private SettingsService settingsService;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
     @Value("${emissionViolationTimeframe}")

@@ -14,29 +14,32 @@
 <body>
 <div class="container">
     <div class="row">
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+
         <div class="col-md-8 col-md-offset-2">
+            <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
             <div class="panel panel-default">
-                <div class="panel-heading"><h5>Fine factor</h5>
-                    <small>List of all violation factors</small>
+                <div class="panel-heading"><h5>Violation factor settings</h5>
                 </div>
                 <div class="panel-body">
 
                     <div class="row">
                         <div class="col-md-12">
+                            <form th:action="@{/settings/violationfactors}" method="post">
                             <table>
                                 <tr><th>Type</th><th>Factor</th></tr>
-                                <form th:action="@{/settings/violationfactors}" method="post">
+
                                 <tr th:each="violationfactor : ${violationFactors}">
                                     <td th:text="${violationfactor.violation}">1</td>
                                     <td><input th:value="${violationfactor.factor}" th:name="${violationfactor.violation}"  type="text" ></td>
                                 </tr>
-                                    <input type="submit" value="Update factors">
-                                </form>
+
+
                             </table>
+                                <input type="submit" value="Update factors">
+                            </form>
                         </div>
                     </div>
 

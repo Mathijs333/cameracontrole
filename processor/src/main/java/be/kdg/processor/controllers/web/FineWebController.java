@@ -1,13 +1,11 @@
 package be.kdg.processor.controllers.web;
 
-import be.kdg.processor.dto.FineDTO;
 import be.kdg.processor.dto.SettingsDTO;
 import be.kdg.processor.dto.ViolationFactorDTO;
-import be.kdg.processor.dto.ViolationFactorsDTO;
 import be.kdg.processor.model.Settings;
 import be.kdg.processor.persistence.FineService;
 import be.kdg.processor.persistence.SettingsService;
-import be.kdg.processor.violations.Violation;
+import be.kdg.processor.violationmanagers.ViolationManager;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,14 +33,14 @@ public class FineWebController {
     private SettingsService settingsService;
 
     @Autowired
-    Map<String, Violation> violations = new HashMap<>();
+    Map<String, ViolationManager> violations = new HashMap<>();
 
 
     @GetMapping("/factor.do")
     public ModelAndView showFactors(Model model) {
         ModelAndView mav = new ModelAndView("factor");
         List<ViolationFactorDTO> violationFactors = new ArrayList<>();
-        for (Violation violation : violations.values()) {
+        for (ViolationManager violation : violations.values()) {
             violationFactors.add(new ViolationFactorDTO(violation.getClass().getSimpleName(), violation.getFactor()));
         }
         mav.addObject("violationFactors", violationFactors);
