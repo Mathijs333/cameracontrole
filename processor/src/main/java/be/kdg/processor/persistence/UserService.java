@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
     }
 
     public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
+        return passwordEncoder.encode(password);
     }
 
     public Boolean checkPassword(String password, String hashedPassword) {
@@ -68,7 +68,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 }

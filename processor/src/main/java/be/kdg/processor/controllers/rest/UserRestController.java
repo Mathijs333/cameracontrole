@@ -29,7 +29,7 @@ public class UserRestController {
 
     @PostMapping("/create")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        userDTO.setPassword(userDTO.getPassword());
+        userDTO.setPassword(userService.hashPassword(userDTO.getPassword()));
         User user = userService.save(modelMapper.map(userDTO, User.class));
         return new ResponseEntity<>(modelMapper.map(user, UserDTO.class), HttpStatus.CREATED);
     }
@@ -53,7 +53,7 @@ public class UserRestController {
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         User userIn = userService.load(id);
-        User userOut = userService.updateUser(userIn, userDTO.getUsername(), userDTO.getPassword());
+        User userOut = userService.updateUser(userIn, userDTO.getUsername(), userService.hashPassword(userDTO.getPassword()));
         return new ResponseEntity<>(modelMapper.map(userOut, UserDTO.class), HttpStatus.ACCEPTED);
     }
 
