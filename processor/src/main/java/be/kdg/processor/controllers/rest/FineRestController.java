@@ -47,7 +47,7 @@ public class FineRestController {
     public HttpStatus deleteFine(@PathVariable Long id) {
         Fine fine = fineService.load(id);
         fineService.delete(fine);
-        return HttpStatus.GONE;
+        return HttpStatus.OK;
     }
 
     @PostMapping("/read")

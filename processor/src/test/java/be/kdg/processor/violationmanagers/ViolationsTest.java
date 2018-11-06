@@ -36,7 +36,7 @@ public class ViolationsTest {
     @Autowired
     private ObjectMapper objectMapper;
     private CameraMessage cameraMessage = new CameraMessage(1, "1-AZE-123", LocalDateTime.now());
-    private CameraMessage cameraMessage2 = new CameraMessage(1, "1-AZE-123", LocalDateTime.now().plusNanos(50));
+    private CameraMessage cameraMessage2 = new CameraMessage(1, "1-AZE-123", LocalDateTime.now().plusNanos(500000000));
     private CameraMessage cameraMessage3 = new CameraMessage(4, "1-ABC-123", LocalDateTime.now());
 
     @Test

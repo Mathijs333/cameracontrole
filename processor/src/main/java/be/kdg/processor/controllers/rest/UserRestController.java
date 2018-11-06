@@ -61,6 +61,6 @@ public class UserRestController {
     public HttpStatus deleteUser(@PathVariable Long id) {
         User user = userService.load(id);
         userService.delete(user);
-        return HttpStatus.GONE;
+        return HttpStatus.OK;
     }
 }
