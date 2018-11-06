@@ -44,7 +44,7 @@ public class UserRestController {
     public ResponseEntity<UserDTO> test() {
         Factors[] test = Factors.values();
         User user = new User();
-        user.setPassword("aaaaaa333");
+        user.setPassword(userService.hashPassword("aaaaaa333"));
         user.setUsername("mathijs");
         User userOut = userService.save(user);
         return new ResponseEntity<>(modelMapper.map(userOut, UserDTO.class), HttpStatus.CREATED);
