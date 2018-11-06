@@ -76,7 +76,7 @@ public class UserRestControllerTest {
         user.setPassword("test1");
         userService.save(user);
         UserDTO userTest = new UserDTO();
-        userTest.setUsername("mathijs");
+        userTest.setUsername("mathijss");
         userTest.setPassword("test1");
         String jsonRequest = objectMapper.writeValueAsString(userTest);
         mockMvc.perform(put("/api/user/update/1")
@@ -84,7 +84,7 @@ public class UserRestControllerTest {
                 .content(jsonRequest))
                 .andExpect(status().isAccepted())
                 .andDo(print())
-                .andExpect(content().string(containsString("test1")));
+                .andExpect(content().string(containsString("mathijss")));
     }
 
 
