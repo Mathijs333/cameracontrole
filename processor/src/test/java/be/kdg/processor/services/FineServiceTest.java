@@ -27,7 +27,7 @@ public class FineServiceTest {
 
     @Test
     public void testSaveFine() {
-        Fine fine = new Fine(100, "1-ABC-123", LocalDateTime.now(), "SpeedViolation", 50, 40);
+        Fine fine = new Fine(100, "1-ABC-123", LocalDateTime.now(), "SpeedViolation", 50, 40, "980881252507");
         Fine savedFine = fineService.save(fine);
         assertNotNull("Greeting is not null", savedFine.getId());
     }

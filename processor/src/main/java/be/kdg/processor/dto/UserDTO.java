@@ -3,7 +3,6 @@ package be.kdg.processor.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.validation.constraints.NotEmpty;
 

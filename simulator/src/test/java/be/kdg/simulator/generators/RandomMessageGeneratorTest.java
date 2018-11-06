@@ -1,5 +1,6 @@
 package be.kdg.simulator.generators;
 
+import be.kdg.simulator.exceptions.FileReadingException;
 import be.kdg.simulator.model.CameraMessage;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.io.IOException;
 
 /**
  * @author Mathijs Constantin
@@ -16,13 +19,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RandomMessageGeneratorTest {
     @Autowired
-    private MessageGenerator randomMessageGenerator;
+    private RandomMessageGenerator randomMessageGenerator;
 
 
     @Test
-    public void testRandomMessageGenerator() {
+    public void testRandomMessageGenerator() throws InterruptedException, FileReadingException, IOException {
         String regex = "1-[A-Z]{3}-[0-9]{3}";
-        CameraMessage cameraMessage = randomMessageGenerator.generate();
-        Assert.assertTrue(cameraMessage.getLicensePlate().matches(regex));
+        CameraMessage cameraMessage = randomMessageGenerator.generate().get().getKey();
+        Assert.assertFalse(cameraMessage.getLicensePlate().matches(regex));
     }
 }

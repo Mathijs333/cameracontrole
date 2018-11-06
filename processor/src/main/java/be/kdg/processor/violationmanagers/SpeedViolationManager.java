@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +25,8 @@ public class SpeedViolationManager implements ViolationManager {
     @Value("${speedCameraBufferTime}")
     private int bufferTime;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
-    private Map<CameraMessage, Integer> cameraMessages = ExpiringMap.builder().expiration(bufferTime, TimeUnit.MINUTES).build();
+
+    private Map<CameraMessage, Integer> cameraMessages = new HashMap<>();/*ExpiringMap.builder().expiration(bufferTime, TimeUnit.MINUTES).build();*/
     @Override
     public Optional<Fine> isViolation(Camera camera, CameraMessage message2, Car car) {
         Settings settings = settingsService.load().get();
@@ -40,18 +42,18 @@ public class SpeedViolationManager implements ViolationManager {
             if (LocalDateTime.now().minusMinutes((long)bufferTime).isAfter(message1.getTimestamp())) {
                 cameraMessages.remove(message1);
             }
-            else if (cameraMessages.get(message1) == connectedCamera && message1.getLicensePlate().equals(message2.getLicensePlate())) {
+            if (/*cameraMessages.get(message1) == connectedCamera && */message1.getLicensePlate().equals(message2.getLicensePlate())) {
                 int distance = camera.getSegment().get("distance");
                 long millis = ChronoUnit.MILLIS.between(message1.getTimestamp(), message2.getTimestamp());
                 cameraMessages.remove(message1);
-                int speed = (int)(distance / (millis / 10));
+                int speed = ((int)(distance / (millis / 10))) * 5;
                 if (speed > speedLimit) {
-                    return Optional.of(new Fine(calculateFine(speed, speedLimit), message1.getLicensePlate(), message2.getTimestamp(), this.getClass().getSimpleName(), speed, speedLimit));
+                    return Optional.of(new Fine(calculateFine(speed, speedLimit), message1.getLicensePlate(), message2.getTimestamp(), this.getClass().getSimpleName(), speed, speedLimit, car.getNationalNumber()));
                 }
                 return Optional.empty();
             }
         }
-        cameraMessages.put(message2, connectedCamera);
+        cameraMessages.putIfAbsent(message2, connectedCamera);
         return Optional.empty();
     }
 

@@ -1,6 +1,6 @@
 package be.kdg.simulator.services;
 
-import be.kdg.simulator.generators.FileGenerator;
+import be.kdg.simulator.exceptions.FileReadingException;
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.messengers.Messenger;
 import be.kdg.simulator.model.CameraMessage;
@@ -10,21 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpMessageReturnedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.Optional;
 
 /**
  * @author Mathijs Constantin
  * @version 1.0 27/09/2018 20:41
  */
-//Cameramessage met delay meegeven en deze dan teurg genereren langs service?
+
 @Service
 public class GeneratorService {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneratorService.class);
@@ -32,36 +30,40 @@ public class GeneratorService {
     private MessageGenerator messageGenerator;
     @Autowired
     private Messenger messenger;
+    @Value("${generator.type}")
+    private String generatorType;
 
     @PostConstruct
     public void start() {
         do {
             Pair<CameraMessage, Integer> message = null;
             try {
-                message = messageGenerator.getFullCameraMessage();
-            } catch (InterruptedException e) {
-                LOGGER.error("Error thread interrupted: " + e.getMessage());
+                Optional<Pair<CameraMessage, Integer>> messageOpt = messageGenerator.generate();
+                if (messageOpt.isPresent()) {
+                    message = messageOpt.get();
+                    try {
+                        messenger.sendMessage(message.getKey());
+                    } catch (AmqpMessageReturnedException e) {
+                        LOGGER.error("Error sending to queue: " + e.getMessage());
+                    }
+                    Thread.sleep(message.getValue());
+                    message.getKey().setTimestamp(LocalDateTime.now());
+                    messenger.sendMessage(message.getKey());
+                }
+
             }
-            try {
-                messenger.sendMessage(message.getKey());
-            } catch (JsonProcessingException e) {
+            catch (JsonProcessingException e) {
                 LOGGER.error("Error processing json: " + e.getMessage());
             }
-            catch (AmqpMessageReturnedException e) {
-                LOGGER.error("Error sending to queue: " + e.getMessage());
+            catch (InterruptedException e) {
+                LOGGER.error("Error thread interrupted: " + e.getMessage());
+            } catch (FileReadingException e) {
+                LOGGER.error("Error reading file: " + e.getMessage());
+            } catch (IOException ex) {
+                LOGGER.error("Error reading line in file: " + ex.getMessage());
             }
-            try {
-                Thread.sleep(message.getValue());
-                message.getKey().setTimestamp(LocalDateTime.now());
-                try {
-                    messenger.sendMessage(message.getKey());
-                } catch (JsonProcessingException e) {
-                    LOGGER.error("Error processing json: " + e.getMessage());
-                }
-            }
-            catch (InterruptedException ex) {
-                LOGGER.error("Error thread interrupted: " + ex.getMessage());
-            }
+
+
         }
         while (true);
     }

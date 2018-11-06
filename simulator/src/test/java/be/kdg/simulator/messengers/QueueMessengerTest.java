@@ -1,7 +1,10 @@
 package be.kdg.simulator.messengers;
 
+import be.kdg.simulator.exceptions.FileReadingException;
 import be.kdg.simulator.generators.MessageGenerator;
 import be.kdg.simulator.model.CameraMessage;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,14 +27,14 @@ public class QueueMessengerTest {
     private MessageGenerator messageGenerator;
 
     @Test
-    public void sendMessage() {
+    public void sendMessage() throws FileReadingException {
         Boolean exception = false;
         try {
-            messenger.sendMessage(messageGenerator.generate());
+            messenger.sendMessage(messageGenerator.generate().get().getKey());
         }
         catch (Exception ex) {
             exception = true;
         }
-        assertTrue("Exception thrown", exception);
+        assertFalse("Exception thrown", exception);
     }
 }

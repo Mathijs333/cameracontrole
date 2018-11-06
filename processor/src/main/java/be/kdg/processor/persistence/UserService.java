@@ -1,7 +1,6 @@
 package be.kdg.processor.persistence;
 
 import be.kdg.processor.model.User;
-import be.kdg.processor.model.Fine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

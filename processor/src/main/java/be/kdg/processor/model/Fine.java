@@ -23,14 +23,16 @@ public class Fine {
     private String fineType;
     private int value;
     private int maxValue;
+    private String nationalNumber;
 
-    public Fine(int amount, String licensePlate, LocalDateTime timestamp, String fineType, int value, int maxValue) {
+    public Fine(int amount, String licensePlate, LocalDateTime timestamp, String fineType, int value, int maxValue, String nationalNumber) {
         this.amount = amount;
         this.licensePlate = licensePlate;
         this.timestamp = timestamp;
         this.fineType = fineType;
         this.value = value;
         this.maxValue = maxValue;
+        this.nationalNumber = nationalNumber;
     }
 
     public Fine() {
@@ -106,6 +108,14 @@ public class Fine {
 
     public void setMaxValue(int maxValue) {
         this.maxValue = maxValue;
+    }
+
+    public String getNationalNumber() {
+        return nationalNumber;
+    }
+
+    public void setNationalNumber(String nationalNumber) {
+        this.nationalNumber = nationalNumber;
     }
 
     @Override

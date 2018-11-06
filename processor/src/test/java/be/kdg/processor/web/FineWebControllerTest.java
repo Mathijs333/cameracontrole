@@ -26,7 +26,7 @@ public class FineWebControllerTest {
 
     @Test
     public void testCreateFine() throws Exception {
-        mockMvc.perform(get("/fine/factor.do"))
+        mockMvc.perform(get("/factor.do"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/html;charset=UTF-8"))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("SpeedViolation")));

@@ -36,45 +36,39 @@ public class ViolationsTest {
     @Autowired
     private ObjectMapper objectMapper;
     private CameraMessage cameraMessage = new CameraMessage(1, "1-AZE-123", LocalDateTime.now());
-    private CameraMessage cameraMessage2 = new CameraMessage(1, "1-AZE-123", LocalDateTime.now().plusNanos(500000000));
+    private CameraMessage cameraMessage2 = new CameraMessage(1, "1-AZE-123", LocalDateTime.now().plusNanos(50));
     private CameraMessage cameraMessage3 = new CameraMessage(4, "1-ABC-123", LocalDateTime.now());
 
     @Test
-    public void SpeedViolation() {
-        try {
+    public void SpeedViolation() throws IOException {
+
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage.getLicensePlate()), Car.class);
             speedViolation.isViolation(camera, cameraMessage, car);
             Boolean result = speedViolation.isViolation(camera, cameraMessage2, car).isPresent();
             assertTrue("Speed detectie", result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Test
-    public void EmissionViolation() {
-        try {
+    public void EmissionViolation() throws IOException {
+
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage3.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage3.getLicensePlate()), Car.class);
             Boolean result = emissionViolation.isViolation(camera, cameraMessage3, car).isPresent();
             assertTrue("Emission detectie", result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Test
-    public void SpeedFine() {
-        try {
+    public void SpeedFine() throws IOException {
+
             Camera camera = objectMapper.readValue(cameraServiceProxy.get(cameraMessage.getId()), Camera.class);
             Car car = objectMapper.readValue(licensePlateServiceProxy.get(cameraMessage2.getLicensePlate()), Car.class);
             speedViolation.isViolation(camera, cameraMessage, car);
             int result = speedViolation.calculateFine(80,70);
             assertEquals("Speed fine", (long)result, (long)100);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Test

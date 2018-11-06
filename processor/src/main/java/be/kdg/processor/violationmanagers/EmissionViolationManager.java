@@ -16,6 +16,7 @@ import java.util.Optional;
  */
 @Component
 public class EmissionViolationManager implements ViolationManager {
+    @Autowired
     private SettingsService settingsService;
     private int factor = Factors.valueOf(this.getClass().getSimpleName()).getValue();
     @Value("${emissionViolationTimeframe}")
@@ -38,7 +39,7 @@ public class EmissionViolationManager implements ViolationManager {
                 if (fineService.existsFine(message1.getLicensePlate(), LocalDateTime.now().minusHours((long)timeframe), this.getClass().getSimpleName())) {
                     return Optional.empty();
                 }
-                return Optional.of(new Fine(calculateFine(euronorm, allowedEuronorm), message1.getLicensePlate(), message1.getTimestamp(), this.getClass().getSimpleName(), euronorm, allowedEuronorm));
+                return Optional.of(new Fine(calculateFine(euronorm, allowedEuronorm), message1.getLicensePlate(), message1.getTimestamp(), this.getClass().getSimpleName(), euronorm, allowedEuronorm, car.getNationalNumber()));
             }
         }
         catch (Exception ex) {

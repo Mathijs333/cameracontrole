@@ -1,8 +1,6 @@
 package be.kdg.processor.persistence;
 
-import be.kdg.processor.model.Fine;
 import be.kdg.processor.model.Settings;
-import be.kdg.processor.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

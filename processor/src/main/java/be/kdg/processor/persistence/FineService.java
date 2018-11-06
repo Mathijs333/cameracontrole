@@ -1,7 +1,6 @@
 package be.kdg.processor.persistence;
 
 import be.kdg.processor.model.Fine;
-import be.kdg.processor.receivers.QueueReceiver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

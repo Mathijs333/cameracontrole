@@ -1,10 +1,8 @@
 package be.kdg.processor.model;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.Map;

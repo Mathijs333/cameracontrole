@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -31,7 +32,7 @@ public class FineRestControllerTest {
     @Test
     public void testReadFines() throws Exception {
         mockMvc.perform(get("api/fine/read"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andExpect(content().string(containsString("id")));;
 
     }
 }

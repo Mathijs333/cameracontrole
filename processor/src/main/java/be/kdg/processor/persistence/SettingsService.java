@@ -42,7 +42,6 @@ public class SettingsService {
         for (ViolationManager violation : violations) {
             violationFactors.put(violation.getClass().getSimpleName(), violation.getFactor());
         }
-        if (!settingsRepository.findById((long)1).isPresent()) {
             Settings settings = new Settings();
             settings.setViolationFactors(violationFactors);
             settings.setTimeframeEmission(timeframeEmission);
@@ -50,7 +49,6 @@ public class SettingsService {
             settings.setRetryCount(retryCount);
             settings.setBufferTime(bufferTime);
             save(settings);
-        }
 
     }
     public Optional<Settings> load() {

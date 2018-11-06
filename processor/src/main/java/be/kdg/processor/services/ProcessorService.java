@@ -17,9 +17,13 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
+ *
+ * Receives all messages and checks them on all possible violations.
+ * Saves fine in case violation is detected.
+ *
  * @author Mathijs Constantin
  * @version 1.0 4/10/2018 21:31
- * Class that gets messages and checks them on violations
+ *
  */
 @Service
 public class ProcessorService {
@@ -35,7 +39,6 @@ public class ProcessorService {
     @Autowired
     Map<String, ViolationManager> violations = new HashMap<>();
     public void receiveCameraMessage(CameraMessage message) throws MessageProcessingException {
-            System.out.println(message.toString());
             try {
                 Camera camera = cameraService.getCameraById(message.getId());
                 Car car = licensePlateService.getCarByLicensePlate(message.getLicensePlate());
@@ -44,12 +47,12 @@ public class ProcessorService {
                     if (result.isPresent()) {
                         Fine fine = result.get();
                         fineService.save(fine);
-                        LOGGER.info(fine.toString());
+                        LOGGER.info("Fine saved: " + fine.getFineType());
                     }
                 }
             }
             catch (Exception ex) {
-                throw new MessageProcessingException(ex.getMessage());
+                throw new MessageProcessingException(ex);
             }
         }
 

@@ -1,6 +1,8 @@
 package be.kdg.simulator.messengers;
 
 import be.kdg.simulator.model.CameraMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,14 @@ public class CommandLineMessengerTest {
     private Messenger messenger;
 
     @Test
-    public void sendMessage() {
-        messenger.sendMessage(new CameraMessage());
+    public void sendMessage()  {
+        Boolean exception = false;
+        try {
+            messenger.sendMessage(new CameraMessage());
+        }
+        catch (Exception ex) {
+            exception = true;
+        }
+        Assert.assertFalse("Thrown exception", exception);
     }
 }

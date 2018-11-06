@@ -6,13 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 import java.util.Random;
 
 @Component
@@ -30,13 +28,6 @@ public class RandomMessageGenerator implements MessageGenerator {
     @Value("${rushHourTimeframes}")
     private String rushHourTimeFrames;
     private static final Logger LOGGER = LoggerFactory.getLogger(FileGenerator.class);
-
-    @Override
-    public CameraMessage generate() {
-       CameraMessage message = new CameraMessage(random.nextInt(MAX_ID - 1) + 1, generateLicensePlate(), LocalDateTime.now());
-       LOGGER.info("Generated: ", message);
-       return message;
-    }
 
     private void checkRushHour() {
         LocalTime now = LocalTime.now();
@@ -56,11 +47,13 @@ public class RandomMessageGenerator implements MessageGenerator {
     }
 
     @Override
-    public Pair<CameraMessage, Integer> getFullCameraMessage() throws InterruptedException {
+    public Optional<Pair<CameraMessage, Integer>> generate() throws InterruptedException {
+        CameraMessage message = new CameraMessage(random.nextInt(MAX_ID - 1) + 1, generateLicensePlate(), LocalDateTime.now());
+        LOGGER.info("Generated: ", message);
         checkRushHour();
         Thread.sleep(random.nextInt(1000) * frequency);
         int minutes = random.nextInt(1000) + 100;
-        return new Pair<>(generate(), minutes);
+        return Optional.of(new Pair(message, minutes));
     }
 
     public String generateLicensePlate() {

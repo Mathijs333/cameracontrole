@@ -31,6 +31,8 @@ public class FineDTO {
     private int value;
     @NotEmpty
     private int maxValue;
+    @NotEmpty
+    private String nationalNumber;
 
     public int getAmount() {
         return amount;
@@ -94,5 +96,13 @@ public class FineDTO {
 
     public void setMaxValue(int maxValue) {
         this.maxValue = maxValue;
+    }
+
+    public String getNationalNumber() {
+        return nationalNumber;
+    }
+
+    public void setNationalNumber(String nationalNumber) {
+        this.nationalNumber = nationalNumber;
     }
 }
