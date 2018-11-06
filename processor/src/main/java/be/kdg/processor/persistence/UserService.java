@@ -30,8 +30,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = load(username);
-        return org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder()
-                .username(username)
+        return org.springframework.security.core.userdetails.User.withUsername(username)
                 .password(user.getPassword())
                 .roles("USER")
                 .build();
@@ -69,7 +68,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(User user) {
-        user.setPassword(/*passwordEncoder.encode(*/user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 }
